@@ -1,0 +1,73 @@
+# Ignore files without extensions
+* 
+!/**/
+!*.*
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.com
+*.class
+*.dll
+*.exe
+*.o
+
+# C extensions
+*.so
+
+# Django stuff
+*.log
+*.pot
+
+# Databases
+*.sql
+*.sqlite
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Distribution / packaging
+bin/
+build/
+develop-eggs/
+dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Rope
+.ropeproject
+
+# Sphinx documentation
+docs/_build/
