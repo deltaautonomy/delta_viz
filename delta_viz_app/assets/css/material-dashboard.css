@@ -13836,7 +13836,7 @@ fieldset[disabled] .form-group .form-control {
   position: relative;
   color: inherit;
   height: 50px;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   line-height: 30px;
   padding: 0.625rem 0;
   font-weight: 300;
@@ -15036,7 +15036,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .footer {
-  padding: 0.9375rem 0;
+  padding: 0rem;
   text-align: center;
   display: -webkit-flex;
   /* Safari */
@@ -15056,7 +15056,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 
 .footer ul li a {
   color: inherit;
-  padding: 0.9375rem;
+  padding: 0rem;
   font-weight: 500;
   font-size: 12px;
   text-transform: uppercase;
@@ -15531,13 +15531,13 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .main-panel {
   position: relative;
   float: right;
-  width: calc(100% - 260px);
+  width: 100%;
   transition: 0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1);
 }
 
 .main-panel>.content {
   margin-top: 70px;
-  padding: 30px 15px;
+  padding: 25px 15px 0px 15px;
   min-height: calc(100vh - 123px);
 }
 
@@ -19552,7 +19552,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition {
-  background-color: #1a2035;
+  background-color: #1a1a1a;
 }
 
 .dark-edition .btn,
@@ -20537,12 +20537,12 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition .card {
-  background: #202940;
+  background: #303030;
 }
 
 .dark-edition .card .card-header.card-header-text .card-title,
 .dark-edition .card .card-header.card-header-icon .card-title {
-  color: #606477;
+  color: #8b92a9;
 }
 
 .dark-edition .card .card-header.card-header-tabs .nav-tabs-title {
@@ -20563,7 +20563,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition .card .card-body .card-description {
-  color: #606477;
+  color: #8b92a9;
 }
 
 .dark-edition .card .card-body+.card-footer .stats,

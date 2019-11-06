@@ -12,52 +12,38 @@
   <link rel="stylesheet" href="assets/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <style type="text/css">
+    .blinking {
+      animation:
+        blinkingText 2s infinite;
+    }
+
+    @keyframes blinkingText{
+      0%   { color: #303030; }
+      25%  { color: #303030; }
+      50%  { color: #4ea752; }
+      75%  { color: #303030; }
+      100% { color: #303030; }
+    }
+  </style>
 </head>
 
 <body class="dark-edition">
-  <div class="wrapper ">
-    <div class="sidebar" data-color="azure" data-background-color="black" data-image="./assets/img/sidebar-2.jpg">
-      <!--
-      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-      Tip 2: you can also add an image using data-image tag
-  -->
-      <div class="logo">
-        <a href="http://deltaautonomy.github.io" class="simple-text logo-normal">
-          Delta Logo Here
-        </a>
-      </div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item active  ">
-            <a class="nav-link" href="javascript:void(0)">
-              <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <!-- your sidebar here -->
-        </ul>
-      </div>
-    </div>
+  <div class="wrapper">
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+            <a class="navbar-brand" href="javascript:void(0)">
+              <i id="cas_active" class="material-icons blinking">fiber_manual_record</i>
+              Collision Avoidance System Dashboard
+            </a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <img style='width: 25%; object-fit: contain; float: right;' src="./assets/img/DA-Logo-FINAL-01-Black-Alpha.png">
-              </li>
-            </ul>
+          <div>
+            <img style='width: 25%; object-fit: contain; float: right; padding-top: 1%; padding-right: 1%' src="./assets/img/DA-Logo-FINAL-01-Black-Alpha.png">
           </div>
         </div>
       </nav>
@@ -69,15 +55,14 @@
             <div class="col-xl-4 col-lg-12">
               <div class="card card-chart">
                 <div class="card-header card-header-success">
-                  <div class="ct-chart" id="dailySalesChart"></div>
-                </div>
-                <div class="card-body">
                   <h4 class="card-title">Camera Stream</h4>
-                  <p class="card-category">Running Successfully</p>
+                </div>
+                <div class="card-body" style="padding: 10px">
+                  <!-- <p class="card-category">Running Successfully</p> -->
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <i class="material-icons">access_time</i> updated 5 seconds ago
+                    <i class="material-icons">access_time</i> Running Successfully
                   </div>
                 </div>
               </div>
@@ -85,15 +70,14 @@
             <div class="col-xl-4 col-lg-12">
               <div class="card card-chart">
                 <div class="card-header card-header-warning">
-                  <div class="ct-chart" id="websiteViewsChart"></div>
-                </div>
-                <div class="card-body">
                   <h4 class="card-title">RADAR Stream</h4>
-                  <p class="card-category">Running Successfully</p>
+                </div>
+                <div class="card-body" style="padding: 10px">
+                  <!-- <p class="card-category">Running Successfully</p> -->
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <i class="material-icons">access_time</i> updated 5 seconds ago
+                    <i class="material-icons">access_time</i> Running Successfully
                   </div>
                 </div>
               </div>
@@ -101,15 +85,84 @@
             <div class="col-xl-4 col-lg-12">
               <div class="card card-chart">
                 <div class="card-header card-header-danger">
-                  <div class="ct-chart" id="completedTasksChart"></div>
-                </div>
-                <div class="card-body">
                   <h4 class="card-title">Collision Avoidance System</h4>
-                  <p class="card-category">Running Successfully</p>
+                </div>
+                <div class="card-body" style="padding: 10px">
+                  <!-- <p class="card-category">Running Successfully</p> -->
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <i class="material-icons">access_time</i> updated 5 seconds ago
+                    <i class="material-icons">access_time</i> Running Successfully
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pipeline status -->
+          <div class="row">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">warning</i>
+                  </div>
+                  <p class="card-category">Perception Pipeline</p>
+                  <h3 class="card-title">24<small> FPS</small></h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <!-- <i class="material-icons text-warning">warning</i>
+                    <a href="#pablo" class="warning-link">FPS dropped below 24...</a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">check_circle</i>
+                  </div>
+                  <p class="card-category">Tracking and Sensor Fusion Pipeline</p>
+                  <h3 class="card-title">24<small> FPS</small></h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <!-- <i class="material-icons">update</i> Just Updated -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">error</i>
+                  </div>
+                  <p class="card-category">Trajectory Prediction Pipeline</p>
+                  <h3 class="card-title">24<small> FPS</small></h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <!-- <i class="material-icons text-danger">error</i>
+                    <a href="#pablo" class="danger-link">Pipeline failure...</a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">check_circle</i>
+                  </div>
+                  <p class="card-category">Planning and Controls Pipeline</p>
+                  <h3 class="card-title">24<small> FPS</small></h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <!-- <i class="material-icons">update</i> Just Updated -->
                   </div>
                 </div>
               </div>
@@ -117,10 +170,9 @@
           </div>
 
           <div class="row">
-
             <div class="col-lg-6 col-md-12">
               <div class="card">
-                <div class="card-header card-header-tabs card-header-warning">
+                <div class="card-header card-header-tabs card-header-success">
                   <div class="nav-tabs-navigation">
                     <div class="nav-tabs-wrapper">
                       <span class="nav-tabs-title">Visualization</span>
@@ -150,7 +202,7 @@
                 <div class="card-body">
                   <div class="tab-content">
                     <div class="tab-pane active" id="profile">
-                      <img id="viz_camera1" style='height: 100%; width: 100%; object-fit: contain' src="">
+                      <img id="stream1" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
                     </div>
                   </div>
                 </div>
@@ -165,19 +217,19 @@
                       <span class="nav-tabs-title">Pipelines</span>
                       <ul class="nav nav-tabs" data-tabs="tabs">
                         <li class="nav-item">
-                          <a class="nav-link active" href="#profile" data-toggle="tab">
+                          <a class="nav-link active" href="#right_tab1" data-toggle="tab">
                             <i class="material-icons">filter_1</i> Perception
                             <div class="ripple-container"></div>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#messages" data-toggle="tab">
+                          <a class="nav-link" href="#right_tab2" data-toggle="tab">
                             <i class="material-icons">filter_2</i> Tracking
                             <div class="ripple-container"></div>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#settings" data-toggle="tab">
+                          <a class="nav-link" href="#right_tab3" data-toggle="tab">
                             <i class="material-icons">filter_3</i> Planning
                             <div class="ripple-container"></div>
                           </a>
@@ -188,8 +240,14 @@
                 </div>
                 <div class="card-body">
                   <div class="tab-content">
-                    <div class="tab-pane active" id="profile">
+                    <div class="tab-pane active" id="right_tab1">
                       <img style='height: 100%; width: 100%; object-fit: contain' src="https://miro.medium.com/max/1233/1*uWy1YySsC7D-n8aD-0iNyA.gif">
+                    </div>
+                    <div class="tab-pane" id="right_tab2">
+                      <img style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                    </div>
+                    <div class="tab-pane" id="right_tab3">
+                      <img style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
                     </div>
                   </div>
                 </div>
@@ -200,14 +258,12 @@
       </div>
       <footer class="footer">
         <div class="container-fluid">
-          <div class="copyright float-right">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear())
-            </script>, made with <i class="material-icons">favorite</i> by
-            <a href="https://www.deltaautonomy.github.io" target="_blank">Delta Autonomy</a>.
+          <div class="copyright">
+            Collision Avoidance System Dashboard v1.0
+            <br/> &copy; 2019, Created by
+            <a href="https://www.deltaautonomy.github.io" target="_blank">Delta Autonomy</a>
+            <br/> Robotics Institute, Carnegie Mellon University
           </div>
-          <!-- your footer here -->
         </div>
       </footer>
     </div>
@@ -259,13 +315,13 @@
 
     var listener = new ROSLIB.Topic({
       ros : ros,
-      name : '/viz_camera1/image/compressed',
+      name : '/stream1/image/compressed',
       messageType : 'sensor_msgs/CompressedImage'
     });
 
     listener.subscribe(function(message) {
       console.log('Received message on ' + listener.name + ': ');
-      document.getElementById('viz_camera1').src = "data:image/jpg;base64," + message.data;
+      document.getElementById('stream1').src = "data:image/jpg;base64," + message.data;
       // listener.unsubscribe();
     });
   </script>

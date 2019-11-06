@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot
+   name="ardop">
+
+   <link name="ego_vehicle" />
+
+   <link
+      name="trailer_full">
+      <inertial>
+         <origin
+            xyz="0 0 0"
+            rpy="0 0 0" />
+         <mass
+            value="6" />
+         <inertia
+            ixx="0"
+            ixy="0"
+            ixz="0"
+            iyy="0"
+            iyz="0"
+            izz="0" />
+      </inertial>
+      <visual>
+         <origin
+            xyz="0 0 0"
+            rpy="0 0 3.1416" />
+         <geometry>
+            <mesh
+               filename="package://delta_description/meshes/trailer_full.dae" />
+         </geometry>
+      </visual>
+      <collision>
+         <origin
+            xyz="0 0 0"
+            rpy="0 0 3.1416" />
+         <geometry>
+            <mesh
+               filename="package://delta_description/meshes/trailer_full.dae" />
+         </geometry>
+      </collision>
+   </link>
+
+   <joint
+      name="fixed_joint"
+      type="fixed">
+      <parent
+         link="ego_vehicle" />
+      <child
+         link="trailer_full" />
+   </joint>
+</robot>

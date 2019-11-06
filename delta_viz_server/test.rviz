@@ -91,7 +91,7 @@ Visualization Manager:
       Marker Topic: /delta/tracking_fusion/tracker/track_id_marker
       Name: Track ID Label
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
     - Class: jsk_rviz_plugin/PictogramArray
@@ -113,36 +113,36 @@ Visualization Manager:
       Marker Topic: /delta/tracking_fusion/tracker/trajectory_marker
       Name: On-Coming Vehicles Trajectory
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 0.699999988
       Class: rviz/Map
       Color Scheme: raw
       Draw Behind: true
-      Enabled: true
+      Enabled: false
       Name: Occupancy Grid (Tracking)
       Topic: /delta/tracking_fusion/tracker/occupancy_grid
       Unreliable: false
       Use Timestamp: false
-      Value: true
+      Value: false
     - Alpha: 0.699999988
       Class: rviz/Map
-      Color Scheme: costmap
+      Color Scheme: raw
       Draw Behind: true
-      Enabled: false
+      Enabled: true
       Name: Occupancy Grid (Perception)
       Topic: /delta/perception/occupancy_grid
       Unreliable: false
       Use Timestamp: false
-      Value: false
-    - Background Color: 70; 70; 70
-      Camera Info Topic: /viz_camera1/camera_info
+      Value: true
+    - Background Color: 48; 48; 48
+      Camera Info Topic: /stream1/camera_info
       Class: rviz_camera_stream/CameraPub
-      Display namespace: /viz_camera1
+      Display namespace: /stream1
       Enabled: true
       Frame Rate: -1
-      Image Topic: /viz_camera1/image
+      Image Topic: /stream1/image
       Name: CameraPub
       Queue Size: 2
       Value: true
@@ -159,10 +159,11 @@ Visualization Manager:
         On-Coming Vehicles Trajectory: true
         Radar Track Marker: true
         Track ID Label: true
+        Trailer Model: true
         Value: true
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /viz_camera1/image
+      Image Topic: /stream1/image
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -177,8 +178,33 @@ Visualization Manager:
       Length: 1
       Name: CameraPub Axes
       Radius: 0.100000001
-      Reference Frame: viz_camera1
+      Reference Frame: stream1
       Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        ego_vehicle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        trailer_head:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: Trailer Model
+      Robot Description: robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
