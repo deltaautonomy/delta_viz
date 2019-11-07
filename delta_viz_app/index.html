@@ -1,72 +1,695 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8" />
+  <title>DeltaViz</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!-- Fonts and icons -->
+  <link rel="stylesheet" type="text/css" href="assets/css/roboto.css" />
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  <!-- Material Kit CSS -->
+  <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
 
-<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-<script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+  <!-- Custom CSS -->
+  <style type="text/css">
+    .blinking {
+      animation:
+        blinkingText 2s infinite;
+    }
 
-<script type="text/javascript" type="text/javascript">
-  // Connecting to ROS
-  // -----------------
+    @keyframes blinkingText{
+      0%   { color: #303030; }
+      25%  { color: #303030; }
+      50%  { color: #4ea752; }
+      75%  { color: #303030; }
+      100% { color: #303030; }
+    }
 
-  var ros = new ROSLIB.Ros({
-    url : 'ws://localhost:9090'
-  });
+    .dark-edition .card .danger_flashing .card-icon,
+    .dark-edition .card .danger_flashing .card-text,
+    .dark-edition .card .danger_flashing:not(.card-header-icon):not(.card-header-text),
+    .dark-edition .card.bg-danger,
+    .dark-edition .card.card-rotate.bg-danger .front,
+    .dark-edition .card.card-rotate.bg-danger .back {
+      animation:
+        dangerFlashing 0.75s infinite;
+    }
 
-  ros.on('connection', function() {
-    console.log('Connected to websocket server.');
-  });
-
-  ros.on('error', function(error) {
-    console.log('Error connecting to websocket server: ', error);
-  });
-
-  ros.on('close', function() {
-    console.log('Connection to websocket server closed.');
-  });
-
-  // Subscribing to a Topic
-  // ----------------------
-
-  var listener = new ROSLIB.Topic({
-    ros : ros,
-    name : '/viz_camera1/image/compressed',
-    messageType : 'sensor_msgs/CompressedImage'
-  });
-
-  listener.subscribe(function(message) {
-    console.log('Received message on ' + listener.name + ': ');
-    document.getElementById('image').src = "data:image/jpg;base64," + message.data;
-    // listener.unsubscribe();
-  });
-</script>
-
-<script type="text/javascript">
-  // perception_diagnostics.subscribe(function(msg) {
-  //   var pipeline = msg.status[0].hardware_id;
-  //   var time_sec = (msg.header.stamp.secs * 10e9 + msg.header.stamp.nsecs) / 10e9;
-  //   total_dict[pipeline]['count'] += 1;
-    
-  //   if (last_time_dict[pipeline] == undefined || total_dict[pipeline]['count'] < 5) {
-  //     last_time_dict[pipeline] = time_sec;
-  //     return;
-  //   }
-
-  //   var dt = time_sec - last_time_dict[pipeline];
-  //   total_dict[pipeline]['time'] = total_dict[pipeline]['time'] + dt;
-  //   fps_dict[pipeline] = total_dict[pipeline]['count'] / total_dict[pipeline]['time'];
-  //   console.log(fps_dict[pipeline]);
-
-  //   last_time_dict[pipeline] = time_sec;
-  // });
-</script>
-
+    @keyframes dangerFlashing{
+      0%   { background: #505050; }
+      25%  { background: #505050; }
+      50%  { background: #da3a36; }
+      75%  { background: #505050; }
+      100% { background: #505050; }
+    }
+  </style>
 </head>
 
-<body>
-  <h1>Delta Autonomy</h1>
-  <p>Collision Avoidance System</p>
-  <img id="image" src="pic_trulli.jpg">
+<body class="dark-edition">
+  <div class="wrapper">
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:void(0)">
+              <i id="cas_active" class="material-icons blinking">fiber_manual_record</i>
+              Collision Avoidance System Dashboard
+            </a>
+          </div>
+          <div>
+            <img style='width: 25%; object-fit: contain; float: right; padding-top: 1%; padding-right: 1%' src="./assets/img/DA-Logo-FINAL-01-Black-Alpha.png">
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+          <!-- Main Content -->
+          <div class="row">
+            <div class="col-xl-4 col-lg-12">
+              <div class="card card-chart">
+                <div class="card-header card-header-success">
+                  <h4 class="card-title">Camera Stream</h4>
+                </div>
+                <div class="card-body" style="padding: 10px">
+                  <!-- <p class="card-category">Running Successfully</p> -->
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">access_time</i> Running Successfully
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-4 col-lg-12">
+              <div class="card card-chart">
+                <div class="card-header card-header-warning">
+                  <h4 class="card-title">RADAR Stream</h4>
+                </div>
+                <div class="card-body" style="padding: 10px">
+                  <!-- <p class="card-category">Running Successfully</p> -->
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">access_time</i> Running Successfully
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-4 col-lg-12">
+              <div class="card card-chart">
+                <div class="card-header card-header-danger">
+                  <h4 class="card-title">Collision Avoidance System</h4>
+                </div>
+                <div class="card-body" style="padding: 10px">
+                  <!-- <p class="card-category">Running Successfully</p> -->
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">access_time</i> Running Successfully
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pipeline status -->
+          <div class="row">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div id="perception_status" class="card-header danger_flashing card-header-icon">
+                  <div class="card-icon">
+                    <i id="perception_icon" class="material-icons">cancel</i>
+                  </div>
+                  <p class="card-category">Perception Pipeline</p>
+                  <h3 class="card-title"><span id="perception_fps">24</span><small> FPS</small></h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <!-- <i class="material-icons text-warning">warning</i>
+                    <a href="#pablo" class="warning-link">FPS dropped below 24...</a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div id="tracking_fusion_status" class="card-header danger_flashing card-header-icon">
+                  <div class="card-icon">
+                    <i id="tracking_fusion_icon" class="material-icons">cancel</i>
+                  </div>
+                  <p class="card-category">Tracking and Sensor Fusion Pipeline</p>
+                  <h3 class="card-title"><span id="tracking_fusion_fps">24</span><small> FPS</small></h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <!-- <i class="material-icons">update</i> Just Updated -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div id="prediction_status" class="card-header danger_flashing card-header-icon">
+                  <div class="card-icon">
+                    <i id="prediction_icon" class="material-icons">cancel</i>
+                  </div>
+                  <p class="card-category">Trajectory Prediction Pipeline</p>
+                  <h3 class="card-title"><span id="prediction_fps">24</span><small> FPS</small></h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <!-- <i class="material-icons text-danger">error</i>
+                    <a href="#pablo" class="danger-link">Pipeline failure...</a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div id="planning_controls_status" class="card-header danger_flashing card-header-icon">
+                  <div class="card-icon">
+                    <i id="planning_controls_icon" class="material-icons">cancel</i>
+                  </div>
+                  <p class="card-category">Planning and Controls Pipeline</p>
+                  <h3 class="card-title"><span id="planning_controls_fps">24</span><small> FPS</small></h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <!-- <i class="material-icons">update</i> Just Updated -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <div class="card">
+                <div class="card-header card-header-tabs card-header-success">
+                  <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                      <span class="nav-tabs-title">Visualization</span>
+                      <ul class="nav nav-tabs" data-tabs="tabs">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#left_tab1" data-toggle="tab" onclick="left_tab1_onclick()">
+                            <i class="material-icons">filter_1</i> Front View
+                            <div class="ripple-container"></div>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#left_tab2" data-toggle="tab" onclick="left_tab2_onclick()">
+                            <i class="material-icons">filter_2</i> Top View
+                            <div class="ripple-container"></div>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#left_tab3" data-toggle="tab" onclick="left_tab3_onclick()">
+                            <i class="material-icons">filter_3</i> Side View
+                            <div class="ripple-container"></div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="left_tab1">
+                      <img id="left_stream1" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                    </div>
+                    <div class="tab-pane" id="left_tab2">
+                      <img id="left_stream2" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                    </div>
+                    <div class="tab-pane" id="left_tab3">
+                      <img id="left_stream3" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <div class="card">
+                <div class="card-header card-header-tabs card-header-success">
+                  <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                      <span class="nav-tabs-title">Pipelines</span>
+                      <ul class="nav nav-tabs" data-tabs="tabs">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#right_tab1" data-toggle="tab" onclick="right_tab1_onclick()">
+                            <i class="material-icons">filter_1</i> Perception
+                            <div class="ripple-container"></div>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#right_tab2" data-toggle="tab" onclick="right_tab2_onclick()">
+                            <i class="material-icons">filter_2</i> Tracking
+                            <div class="ripple-container"></div>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#right_tab3" data-toggle="tab" onclick="right_tab3_onclick()">
+                            <i class="material-icons">filter_3</i> Planning
+                            <div class="ripple-container"></div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="right_tab1">
+                      <img id="right_stream1" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                    </div>
+                    <div class="tab-pane" id="right_tab2">
+                      <img id="right_stream2" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                    </div>
+                    <div class="tab-pane" id="right_tab3">
+                      <img id="right_stream3" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="copyright">
+            Collision Avoidance System Dashboard v1.0
+            <br/> &copy; 2019, Created by
+            <a href="https://www.deltaautonomy.github.io" target="_blank">Delta Autonomy</a>
+            <br/> Robotics Institute, Carnegie Mellon University
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!--   Core JS Files   -->
+  <script src="./assets/js/core/jquery.min.js"></script>
+  <script src="./assets/js/core/popper.min.js"></script>
+  <script src="./assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="./assets/js/plugins/default-passive-events.js"></script>
+  <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="./assets/js/buttons.js"></script>
+  <!-- Chartist JS -->
+  <script src="./assets/js/plugins/chartist.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="./assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="./assets/js/material-dashboard.js?v=2.1.0"></script>
+  <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+  <script src="./assets/demo/demo.js"></script>
+  <!-- ROS libjs -->
+  <script src="./assets/js/eventemitter2.min.js"></script>
+  <script src="./assets/js/roslib.min.js"></script>
+
+  <!-- ROS interface -->
+  <script type="text/javascript" type="text/javascript">
+
+    // ################### Connecting to ROS ###################
+
+    var ros = new ROSLIB.Ros({
+      url : 'ws://localhost:9090'
+    });
+    // TODO: flash off
+
+    ros.on('connection', function() {
+      // TODO: flash connected
+      console.log('Connected to websocket server.');
+    });
+
+    ros.on('error', function(error) {
+      // TODO: flash error
+      console.log('Error connecting to websocket server: ', error);
+    });
+
+    ros.on('close', function() {
+      // TODO: flash off
+      console.log('Connection to websocket server closed.');
+    });
+
+    // ################### Define diagnostics topics ###################
+
+    var perception_diagnostics = new ROSLIB.Topic({
+      ros: ros, name: '/delta/perception/object_detection/diagnostics',
+      messageType: 'diagnostic_msgs/DiagnosticArray'
+    });
+
+    var lane_diagnostics = new ROSLIB.Topic({
+      ros: ros, name: '/delta/perception/lane_detection/diagnostics',
+      messageType: 'diagnostic_msgs/DiagnosticArray'
+    });
+
+    var tracking_diagnostics = new ROSLIB.Topic({
+      ros: ros, name: '/delta/tracking_fusion/tracker/diagnostics',
+      messageType: 'diagnostic_msgs/DiagnosticArray'
+    });
+
+    var prediction_diagnostics = new ROSLIB.Topic({
+      ros: ros, name: '/delta/prediction/ego_vehicle/diagnostics',
+      messageType: 'diagnostic_msgs/DiagnosticArray'
+    });
+
+    var planning_diagnostics = new ROSLIB.Topic({
+      ros: ros, name: '/delta/planning_controls/ego_vehicle/diagnostics',
+      messageType: 'diagnostic_msgs/DiagnosticArray'
+    });
+
+    // ################### Subscribe to diagnostics topics ###################
+
+    var initial_date = new Date();
+    var initial_time = initial_date.getTime() / 1000;
+
+    var fps_dict = {
+      'perception': {'limit': 10.0, 'last_time': initial_time, 'count': 0.0, 'delta': 0.0, 'fps': 0.0},
+      'prediction': {'limit': 10.0, 'last_time': initial_time, 'count': 0.0, 'delta': 0.0, 'fps': 0.0},
+      'tracking_fusion': {'limit': 10.0, 'last_time': initial_time, 'count': 0.0, 'delta': 0.0, 'fps': 0.0},
+      'planning_controls': {'limit': 10.0, 'last_time': initial_time, 'count': 0.0, 'delta': 0.0, 'fps': 0.0},
+    };
+
+    function update_fps(msg) {
+      var date = new Date();
+      var pipeline = msg.status[0].hardware_id;
+      for (var i = 0; i < msg.status.length; i++) {
+        fps_dict[pipeline]['delta'] += 1 / parseFloat(msg.status[i].message);
+      }
+      fps_dict[pipeline]['count'] += 1;
+      fps_dict[pipeline]['fps'] = (fps_dict[pipeline]['count'] / fps_dict[pipeline]['delta']);
+      fps_dict[pipeline]['last_time'] = date.getTime() / 1000;
+      // fps_dict[pipeline]['last_time'] = (msg.header.stamp.secs * 10e9 + msg.header.stamp.nsecs) / 10e9;
+    }
+
+    perception_diagnostics.subscribe(function(msg) { update_fps(msg); });
+    lane_diagnostics.subscribe(function(msg) { update_fps(msg); });
+    tracking_diagnostics.subscribe(function(msg) { update_fps(msg); });
+    prediction_diagnostics.subscribe(function(msg) { update_fps(msg); });
+    planning_diagnostics.subscribe(function(msg) { update_fps(msg); });
+
+    // ################### Update FPS in GUI ###################
+
+    function update_status(pipeline, limit) {
+      var date = new Date();
+      var update_dt = (date.getTime() / 1000) - fps_dict[pipeline]['last_time'];
+      var status = document.getElementById(pipeline + '_status');
+      var icon = document.getElementById(pipeline + '_icon');
+      var fps = fps_dict[pipeline]['fps'];
+
+      if (fps < 2 || update_dt > 2.0) {
+        // TODO: raise system level alert
+        if (update_dt > 2.0) {
+          icon.innerHTML = 'cancel';
+          document.getElementById(pipeline + '_fps').innerHTML = 0;
+        } else {
+          icon.innerHTML = 'error';
+        }
+
+        status.classList.remove('card-header-success');
+        status.classList.remove('card-header-warning');
+        status.classList.add('danger_flashing');
+      } else if (fps < fps_dict[pipeline]['limit']) {
+        status.classList.remove('danger_flashing');
+        status.classList.remove('card-header-success');
+        status.classList.add('card-header-warning');
+        icon.innerHTML = 'warning';
+      } else if (fps >= fps_dict[pipeline]['limit']) {
+        status.classList.remove('danger_flashing');
+        status.classList.remove('card-header-warning');
+        status.classList.add('card-header-success');
+        icon.innerHTML = 'check_circle';
+      }
+    }
+
+    window.setInterval(function(){
+      const pipelines = Object.keys(fps_dict)
+      for (const pipeline of pipelines) {
+        document.getElementById(pipeline + '_fps').innerHTML = fps_dict[pipeline]['fps'].toFixed();
+        update_status(pipeline)
+      }
+    }, 100);
+
+    // ################### Define image topics ###################
+
+    var rviz_stream1 = new ROSLIB.Topic({
+      ros: ros, name: '/stream1/image/compressed',
+      messageType: 'sensor_msgs/CompressedImage'
+    });
+
+    var rviz_stream2 = new ROSLIB.Topic({
+      ros: ros, name: '/stream2/image/compressed',
+      messageType: 'sensor_msgs/CompressedImage'
+    });
+
+    var rviz_stream3 = new ROSLIB.Topic({
+      ros: ros, name: '/stream3/image/compressed',
+      messageType: 'sensor_msgs/CompressedImage'
+    });
+
+    var object_detection_topic = new ROSLIB.Topic({
+      ros: ros, name: '/delta/visualization/images/object_detection/compressed',
+      messageType: 'sensor_msgs/CompressedImage'
+    });
+
+    var lane_detection_topic = new ROSLIB.Topic({
+      ros: ros, name: '/delta/visualization/images/lane_detection/compressed',
+      messageType: 'sensor_msgs/CompressedImage'
+    });
+
+    // ################### Subscribe to image topics ###################
+  
+    var left_stream = undefined;
+    var right_stream = undefined;
+
+    function left_tab1_onclick() {
+      console.log('left tab 1');
+      if (left_stream != undefined) left_stream.unsubscribe();
+      left_stream = rviz_stream1;
+      rviz_stream1.subscribe(function(message) {
+        // console.log('Received message on ' + rviz_stream1.name + ': ');
+        document.getElementById('left_stream1').src = "data:image/jpg;base64," + message.data;
+      });
+    }
+
+    function left_tab2_onclick() {
+      console.log('left tab 2');
+      if (left_stream != undefined) left_stream.unsubscribe();
+      left_stream = rviz_stream2;
+      rviz_stream2.subscribe(function(message) {
+        // console.log('Received message on ' + rviz_stream2.name + ': ');
+        document.getElementById('left_stream2').src = "data:image/jpg;base64," + message.data;
+      });
+    }
+
+    function left_tab3_onclick() {
+      console.log('left tab 3');
+      if (left_stream != undefined) left_stream.unsubscribe();
+      left_stream = rviz_stream3;
+      rviz_stream3.subscribe(function(message) {
+        // console.log('Received message on ' + rviz_stream3.name + ': ');
+        document.getElementById('left_stream3').src = "data:image/jpg;base64," + message.data;
+      });
+    }
+
+    function right_tab1_onclick() {
+      console.log('right tab 1');
+      if (right_stream != undefined) right_stream.unsubscribe();
+      right_stream = object_detection_topic;
+      object_detection_topic.subscribe(function(message) {
+        // console.log('Received message on ' + object_detection_topic.name + ': ');
+        document.getElementById('right_stream1').src = "data:image/jpg;base64," + message.data;
+      });
+    }
+
+    function right_tab2_onclick() {
+      console.log('right tab 2');
+      if (right_stream != undefined) right_stream.unsubscribe();
+      right_stream = lane_detection_topic;
+      lane_detection_topic.subscribe(function(message) {
+        // console.log('Received message on ' + lane_detection_topic.name + ': ');
+        document.getElementById('right_stream2').src = "data:image/jpg;base64," + message.data;
+      });
+    }
+
+    function right_tab3_onclick() {
+      console.log('right tab 3');
+      if (right_stream != undefined) right_stream.unsubscribe();
+      // right_stream = object_detection_topic;
+      // object_detection_topic.subscribe(function(message) {
+      // // console.log('Received message on ' + object_detection_topic.name + ': ');
+      //   document.getElementById('right_stream3').src = "data:image/jpg;base64," + message.data;
+      // });
+    }
+
+  </script>
+
+  <!-- UI stuff -->
+  <script>
+    $(document).ready(function() {
+      $().ready(function() {
+        $sidebar = $('.sidebar');
+        $sidebar_img_container = $sidebar.find('.sidebar-background');
+        $full_page = $('.full-page');
+        $sidebar_responsive = $('body > .navbar-collapse');
+        window_width = $(window).width();
+
+        $('.fixed-plugin a').click(function(event) {
+          // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+          if ($(this).hasClass('switch-trigger')) {
+            if (event.stopPropagation) {
+              event.stopPropagation();
+            } else if (window.event) {
+              window.event.cancelBubble = true;
+            }
+          }
+        });
+
+        $('.fixed-plugin .active-color span').click(function() {
+          $full_page_background = $('.full-page-background');
+
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-color', new_color);
+          }
+
+          if ($full_page.length != 0) {
+            $full_page.attr('filter-color', new_color);
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.attr('data-color', new_color);
+          }
+        });
+
+        $('.fixed-plugin .background-color .badge').click(function() {
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('background-color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-background-color', new_color);
+          }
+        });
+
+        $('.fixed-plugin .img-holder').click(function() {
+          $full_page_background = $('.full-page-background');
+
+          $(this).parent('li').siblings().removeClass('active');
+          $(this).parent('li').addClass('active');
+
+
+          var new_image = $(this).find("img").attr('src');
+
+          if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+            $sidebar_img_container.fadeOut('fast', function() {
+              $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+              $sidebar_img_container.fadeIn('fast');
+            });
+          }
+
+          if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+            $full_page_background.fadeOut('fast', function() {
+              $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+              $full_page_background.fadeIn('fast');
+            });
+          }
+
+          if ($('.switch-sidebar-image input:checked').length == 0) {
+            var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+          }
+        });
+
+        $('.switch-sidebar-image input').change(function() {
+          $full_page_background = $('.full-page-background');
+
+          $input = $(this);
+
+          if ($input.is(':checked')) {
+            if ($sidebar_img_container.length != 0) {
+              $sidebar_img_container.fadeIn('fast');
+              $sidebar.attr('data-image', '#');
+            }
+
+            if ($full_page_background.length != 0) {
+              $full_page_background.fadeIn('fast');
+              $full_page.attr('data-image', '#');
+            }
+
+            background_image = true;
+          } else {
+            if ($sidebar_img_container.length != 0) {
+              $sidebar.removeAttr('data-image');
+              $sidebar_img_container.fadeOut('fast');
+            }
+
+            if ($full_page_background.length != 0) {
+              $full_page.removeAttr('data-image', '#');
+              $full_page_background.fadeOut('fast');
+            }
+
+            background_image = false;
+          }
+        });
+
+        $('.switch-sidebar-mini input').change(function() {
+          $body = $('body');
+
+          $input = $(this);
+
+          if (md.misc.sidebar_mini_active == true) {
+            $('body').removeClass('sidebar-mini');
+            md.misc.sidebar_mini_active = false;
+
+            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+
+          } else {
+
+            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+            setTimeout(function() {
+              $('body').addClass('sidebar-mini');
+
+              md.misc.sidebar_mini_active = true;
+            }, 300);
+          }
+
+          // we simulate the window Resize so the charts will get updated in realtime.
+          var simulateWindowResize = setInterval(function() {
+            window.dispatchEvent(new Event('resize'));
+          }, 180);
+
+          // we stop the simulation of Window Resize after the animations are completed
+          setTimeout(function() {
+            clearInterval(simulateWindowResize);
+          }, 1000);
+
+        });
+      });
+    });
+  </script>
 </body>
+
 </html>
