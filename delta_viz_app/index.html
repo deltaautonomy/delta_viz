@@ -42,6 +42,26 @@
   });
 </script>
 
+<script type="text/javascript">
+  // perception_diagnostics.subscribe(function(msg) {
+  //   var pipeline = msg.status[0].hardware_id;
+  //   var time_sec = (msg.header.stamp.secs * 10e9 + msg.header.stamp.nsecs) / 10e9;
+  //   total_dict[pipeline]['count'] += 1;
+    
+  //   if (last_time_dict[pipeline] == undefined || total_dict[pipeline]['count'] < 5) {
+  //     last_time_dict[pipeline] = time_sec;
+  //     return;
+  //   }
+
+  //   var dt = time_sec - last_time_dict[pipeline];
+  //   total_dict[pipeline]['time'] = total_dict[pipeline]['time'] + dt;
+  //   fps_dict[pipeline] = total_dict[pipeline]['count'] / total_dict[pipeline]['time'];
+  //   console.log(fps_dict[pipeline]);
+
+  //   last_time_dict[pipeline] = time_sec;
+  // });
+</script>
+
 </head>
 
 <body>

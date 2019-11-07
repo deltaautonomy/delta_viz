@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<!-- <node
+        pkg="image_transport"
+        type="republish"
+        name="republish_carla"
+        output="screen"
+        args="raw in:=/carla/ego_vehicle/camera/rgb/front/image_color
+              compressed out:=/delta/visualization/images/carla">
+    </node> -->
+
+    <node
+        pkg="image_transport"
+        type="republish"
+        name="republish_object_detection"
+        output="screen"
+        args="raw in:=/delta/perception/object_detection/image
+              compressed out:=/delta/visualization/images/object_detection">
+    </node>
+
+    <node
+        pkg="image_transport"
+        type="republish"
+        name="republish_lane_detection"
+        output="screen"
+        args="raw in:=/delta/perception/lane_detection/image
+              compressed out:=/delta/visualization/images/lane_detection">
+    </node>
+
+    <!-- <node
+        pkg="image_transport"
+        type="republish"
+        name="republish_object_detection"
+        output="screen"
+        args="raw in:=/delta/perception/object_detection/image
+              compressed out:=/delta/visualization/images/carla">
+    </node> -->
+</launch>

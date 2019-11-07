@@ -27,6 +27,24 @@
       75%  { color: #303030; }
       100% { color: #303030; }
     }
+
+    .dark-edition .card .danger_flashing .card-icon,
+    .dark-edition .card .danger_flashing .card-text,
+    .dark-edition .card .danger_flashing:not(.card-header-icon):not(.card-header-text),
+    .dark-edition .card.bg-danger,
+    .dark-edition .card.card-rotate.bg-danger .front,
+    .dark-edition .card.card-rotate.bg-danger .back {
+      animation:
+        dangerFlashing 0.75s infinite;
+    }
+
+    @keyframes dangerFlashing{
+      0%   { background: #505050; }
+      25%  { background: #505050; }
+      50%  { background: #da3a36; }
+      75%  { background: #505050; }
+      100% { background: #505050; }
+    }
   </style>
 </head>
 
@@ -103,12 +121,12 @@
           <div class="row">
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div class="card-header card-header-warning card-header-icon">
+                <div id="perception_status" class="card-header danger_flashing card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">warning</i>
+                    <i id="perception_icon" class="material-icons">cancel</i>
                   </div>
                   <p class="card-category">Perception Pipeline</p>
-                  <h3 class="card-title">24<small> FPS</small></h3>
+                  <h3 class="card-title"><span id="perception_fps">24</span><small> FPS</small></h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -120,12 +138,12 @@
             </div>
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div class="card-header card-header-success card-header-icon">
+                <div id="tracking_fusion_status" class="card-header danger_flashing card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">check_circle</i>
+                    <i id="tracking_fusion_icon" class="material-icons">cancel</i>
                   </div>
                   <p class="card-category">Tracking and Sensor Fusion Pipeline</p>
-                  <h3 class="card-title">24<small> FPS</small></h3>
+                  <h3 class="card-title"><span id="tracking_fusion_fps">24</span><small> FPS</small></h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -136,12 +154,12 @@
             </div>
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
+                <div id="prediction_status" class="card-header danger_flashing card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">error</i>
+                    <i id="prediction_icon" class="material-icons">cancel</i>
                   </div>
                   <p class="card-category">Trajectory Prediction Pipeline</p>
-                  <h3 class="card-title">24<small> FPS</small></h3>
+                  <h3 class="card-title"><span id="prediction_fps">24</span><small> FPS</small></h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -153,12 +171,12 @@
             </div>
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div class="card-header card-header-success card-header-icon">
+                <div id="planning_controls_status" class="card-header danger_flashing card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">check_circle</i>
+                    <i id="planning_controls_icon" class="material-icons">cancel</i>
                   </div>
                   <p class="card-category">Planning and Controls Pipeline</p>
-                  <h3 class="card-title">24<small> FPS</small></h3>
+                  <h3 class="card-title"><span id="planning_controls_fps">24</span><small> FPS</small></h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -178,19 +196,19 @@
                       <span class="nav-tabs-title">Visualization</span>
                       <ul class="nav nav-tabs" data-tabs="tabs">
                         <li class="nav-item">
-                          <a class="nav-link active" href="#profile" data-toggle="tab">
+                          <a class="nav-link active" href="#left_tab1" data-toggle="tab" onclick="left_tab1_onclick()">
                             <i class="material-icons">filter_1</i> Front View
                             <div class="ripple-container"></div>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#messages" data-toggle="tab">
+                          <a class="nav-link" href="#left_tab2" data-toggle="tab" onclick="left_tab2_onclick()">
                             <i class="material-icons">filter_2</i> Top View
                             <div class="ripple-container"></div>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#settings" data-toggle="tab">
+                          <a class="nav-link" href="#left_tab3" data-toggle="tab" onclick="left_tab3_onclick()">
                             <i class="material-icons">filter_3</i> Side View
                             <div class="ripple-container"></div>
                           </a>
@@ -201,8 +219,14 @@
                 </div>
                 <div class="card-body">
                   <div class="tab-content">
-                    <div class="tab-pane active" id="profile">
-                      <img id="stream1" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                    <div class="tab-pane active" id="left_tab1">
+                      <img id="left_stream1" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                    </div>
+                    <div class="tab-pane" id="left_tab2">
+                      <img id="left_stream2" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                    </div>
+                    <div class="tab-pane" id="left_tab3">
+                      <img id="left_stream3" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
                     </div>
                   </div>
                 </div>
@@ -217,19 +241,19 @@
                       <span class="nav-tabs-title">Pipelines</span>
                       <ul class="nav nav-tabs" data-tabs="tabs">
                         <li class="nav-item">
-                          <a class="nav-link active" href="#right_tab1" data-toggle="tab">
+                          <a class="nav-link active" href="#right_tab1" data-toggle="tab" onclick="right_tab1_onclick()">
                             <i class="material-icons">filter_1</i> Perception
                             <div class="ripple-container"></div>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#right_tab2" data-toggle="tab">
+                          <a class="nav-link" href="#right_tab2" data-toggle="tab" onclick="right_tab2_onclick()">
                             <i class="material-icons">filter_2</i> Tracking
                             <div class="ripple-container"></div>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#right_tab3" data-toggle="tab">
+                          <a class="nav-link" href="#right_tab3" data-toggle="tab" onclick="right_tab3_onclick()">
                             <i class="material-icons">filter_3</i> Planning
                             <div class="ripple-container"></div>
                           </a>
@@ -241,13 +265,13 @@
                 <div class="card-body">
                   <div class="tab-content">
                     <div class="tab-pane active" id="right_tab1">
-                      <img style='height: 100%; width: 100%; object-fit: contain' src="https://miro.medium.com/max/1233/1*uWy1YySsC7D-n8aD-0iNyA.gif">
+                      <img id="right_stream1" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
                     </div>
                     <div class="tab-pane" id="right_tab2">
-                      <img style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                      <img id="right_stream2" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
                     </div>
                     <div class="tab-pane" id="right_tab3">
-                      <img style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                      <img id="right_stream3" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
                     </div>
                   </div>
                 </div>
@@ -288,42 +312,223 @@
   <!-- ROS libjs -->
   <script src="./assets/js/eventemitter2.min.js"></script>
   <script src="./assets/js/roslib.min.js"></script>
-  
+
   <!-- ROS interface -->
   <script type="text/javascript" type="text/javascript">
-    // Connecting to ROS
-    // -----------------
+
+    // ################### Connecting to ROS ###################
 
     var ros = new ROSLIB.Ros({
       url : 'ws://localhost:9090'
     });
+    // TODO: flash off
 
     ros.on('connection', function() {
+      // TODO: flash connected
       console.log('Connected to websocket server.');
     });
 
     ros.on('error', function(error) {
+      // TODO: flash error
       console.log('Error connecting to websocket server: ', error);
     });
 
     ros.on('close', function() {
+      // TODO: flash off
       console.log('Connection to websocket server closed.');
     });
 
-    // Subscribing to a Topic
-    // ----------------------
+    // ################### Define diagnostics topics ###################
 
-    var listener = new ROSLIB.Topic({
-      ros : ros,
-      name : '/stream1/image/compressed',
-      messageType : 'sensor_msgs/CompressedImage'
+    var perception_diagnostics = new ROSLIB.Topic({
+      ros: ros, name: '/delta/perception/object_detection/diagnostics',
+      messageType: 'diagnostic_msgs/DiagnosticArray'
     });
 
-    listener.subscribe(function(message) {
-      console.log('Received message on ' + listener.name + ': ');
-      document.getElementById('stream1').src = "data:image/jpg;base64," + message.data;
-      // listener.unsubscribe();
+    var lane_diagnostics = new ROSLIB.Topic({
+      ros: ros, name: '/delta/perception/lane_detection/diagnostics',
+      messageType: 'diagnostic_msgs/DiagnosticArray'
     });
+
+    var tracking_diagnostics = new ROSLIB.Topic({
+      ros: ros, name: '/delta/tracking_fusion/tracker/diagnostics',
+      messageType: 'diagnostic_msgs/DiagnosticArray'
+    });
+
+    var prediction_diagnostics = new ROSLIB.Topic({
+      ros: ros, name: '/delta/prediction/ego_vehicle/diagnostics',
+      messageType: 'diagnostic_msgs/DiagnosticArray'
+    });
+
+    var planning_diagnostics = new ROSLIB.Topic({
+      ros: ros, name: '/delta/planning_controls/ego_vehicle/diagnostics',
+      messageType: 'diagnostic_msgs/DiagnosticArray'
+    });
+
+    // ################### Subscribe to diagnostics topics ###################
+
+    var initial_date = new Date();
+    var initial_time = initial_date.getTime() / 1000;
+
+    var fps_dict = {
+      'perception': {'limit': 10.0, 'last_time': initial_time, 'count': 0.0, 'delta': 0.0, 'fps': 0.0},
+      'prediction': {'limit': 10.0, 'last_time': initial_time, 'count': 0.0, 'delta': 0.0, 'fps': 0.0},
+      'tracking_fusion': {'limit': 10.0, 'last_time': initial_time, 'count': 0.0, 'delta': 0.0, 'fps': 0.0},
+      'planning_controls': {'limit': 10.0, 'last_time': initial_time, 'count': 0.0, 'delta': 0.0, 'fps': 0.0},
+    };
+
+    function update_fps(msg) {
+      var date = new Date();
+      var pipeline = msg.status[0].hardware_id;
+      for (var i = 0; i < msg.status.length; i++) {
+        fps_dict[pipeline]['delta'] += 1 / parseFloat(msg.status[i].message);
+      }
+      fps_dict[pipeline]['count'] += 1;
+      fps_dict[pipeline]['fps'] = (fps_dict[pipeline]['count'] / fps_dict[pipeline]['delta']);
+      fps_dict[pipeline]['last_time'] = date.getTime() / 1000;
+      // fps_dict[pipeline]['last_time'] = (msg.header.stamp.secs * 10e9 + msg.header.stamp.nsecs) / 10e9;
+    }
+
+    perception_diagnostics.subscribe(function(msg) { update_fps(msg); });
+    lane_diagnostics.subscribe(function(msg) { update_fps(msg); });
+    tracking_diagnostics.subscribe(function(msg) { update_fps(msg); });
+    prediction_diagnostics.subscribe(function(msg) { update_fps(msg); });
+    planning_diagnostics.subscribe(function(msg) { update_fps(msg); });
+
+    // ################### Update FPS in GUI ###################
+
+    function update_status(pipeline, limit) {
+      var date = new Date();
+      var update_dt = (date.getTime() / 1000) - fps_dict[pipeline]['last_time'];
+      var status = document.getElementById(pipeline + '_status');
+      var icon = document.getElementById(pipeline + '_icon');
+      var fps = fps_dict[pipeline]['fps'];
+
+      if (fps < 2 || update_dt > 2.0) {
+        // TODO: raise system level alert
+        if (update_dt > 2.0) {
+          icon.innerHTML = 'cancel';
+          document.getElementById(pipeline + '_fps').innerHTML = 0;
+        } else {
+          icon.innerHTML = 'error';
+        }
+
+        status.classList.remove('card-header-success');
+        status.classList.remove('card-header-warning');
+        status.classList.add('danger_flashing');
+      } else if (fps < fps_dict[pipeline]['limit']) {
+        status.classList.remove('danger_flashing');
+        status.classList.remove('card-header-success');
+        status.classList.add('card-header-warning');
+        icon.innerHTML = 'warning';
+      } else if (fps >= fps_dict[pipeline]['limit']) {
+        status.classList.remove('danger_flashing');
+        status.classList.remove('card-header-warning');
+        status.classList.add('card-header-success');
+        icon.innerHTML = 'check_circle';
+      }
+    }
+
+    window.setInterval(function(){
+      const pipelines = Object.keys(fps_dict)
+      for (const pipeline of pipelines) {
+        document.getElementById(pipeline + '_fps').innerHTML = fps_dict[pipeline]['fps'].toFixed();
+        update_status(pipeline)
+      }
+    }, 100);
+
+    // ################### Define image topics ###################
+
+    var rviz_stream1 = new ROSLIB.Topic({
+      ros: ros, name: '/stream1/image/compressed',
+      messageType: 'sensor_msgs/CompressedImage'
+    });
+
+    var rviz_stream2 = new ROSLIB.Topic({
+      ros: ros, name: '/stream2/image/compressed',
+      messageType: 'sensor_msgs/CompressedImage'
+    });
+
+    var rviz_stream3 = new ROSLIB.Topic({
+      ros: ros, name: '/stream3/image/compressed',
+      messageType: 'sensor_msgs/CompressedImage'
+    });
+
+    var object_detection_topic = new ROSLIB.Topic({
+      ros: ros, name: '/delta/visualization/images/object_detection/compressed',
+      messageType: 'sensor_msgs/CompressedImage'
+    });
+
+    var lane_detection_topic = new ROSLIB.Topic({
+      ros: ros, name: '/delta/visualization/images/lane_detection/compressed',
+      messageType: 'sensor_msgs/CompressedImage'
+    });
+
+    // ################### Subscribe to image topics ###################
+  
+    var left_stream = undefined;
+    var right_stream = undefined;
+
+    function left_tab1_onclick() {
+      console.log('left tab 1');
+      if (left_stream != undefined) left_stream.unsubscribe();
+      left_stream = rviz_stream1;
+      rviz_stream1.subscribe(function(message) {
+        // console.log('Received message on ' + rviz_stream1.name + ': ');
+        document.getElementById('left_stream1').src = "data:image/jpg;base64," + message.data;
+      });
+    }
+
+    function left_tab2_onclick() {
+      console.log('left tab 2');
+      if (left_stream != undefined) left_stream.unsubscribe();
+      left_stream = rviz_stream2;
+      rviz_stream2.subscribe(function(message) {
+        // console.log('Received message on ' + rviz_stream2.name + ': ');
+        document.getElementById('left_stream2').src = "data:image/jpg;base64," + message.data;
+      });
+    }
+
+    function left_tab3_onclick() {
+      console.log('left tab 3');
+      if (left_stream != undefined) left_stream.unsubscribe();
+      left_stream = rviz_stream3;
+      rviz_stream3.subscribe(function(message) {
+        // console.log('Received message on ' + rviz_stream3.name + ': ');
+        document.getElementById('left_stream3').src = "data:image/jpg;base64," + message.data;
+      });
+    }
+
+    function right_tab1_onclick() {
+      console.log('right tab 1');
+      if (right_stream != undefined) right_stream.unsubscribe();
+      right_stream = object_detection_topic;
+      object_detection_topic.subscribe(function(message) {
+        // console.log('Received message on ' + object_detection_topic.name + ': ');
+        document.getElementById('right_stream1').src = "data:image/jpg;base64," + message.data;
+      });
+    }
+
+    function right_tab2_onclick() {
+      console.log('right tab 2');
+      if (right_stream != undefined) right_stream.unsubscribe();
+      right_stream = lane_detection_topic;
+      lane_detection_topic.subscribe(function(message) {
+        // console.log('Received message on ' + lane_detection_topic.name + ': ');
+        document.getElementById('right_stream2').src = "data:image/jpg;base64," + message.data;
+      });
+    }
+
+    function right_tab3_onclick() {
+      console.log('right tab 3');
+      if (right_stream != undefined) right_stream.unsubscribe();
+      // right_stream = object_detection_topic;
+      // object_detection_topic.subscribe(function(message) {
+      // // console.log('Received message on ' + object_detection_topic.name + ': ');
+      //   document.getElementById('right_stream3').src = "data:image/jpg;base64," + message.data;
+      // });
+    }
+
   </script>
 
   <!-- UI stuff -->
@@ -331,13 +536,9 @@
     $(document).ready(function() {
       $().ready(function() {
         $sidebar = $('.sidebar');
-
         $sidebar_img_container = $sidebar.find('.sidebar-background');
-
         $full_page = $('.full-page');
-
         $sidebar_responsive = $('body > .navbar-collapse');
-
         window_width = $(window).width();
 
         $('.fixed-plugin a').click(function(event) {
