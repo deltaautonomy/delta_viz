@@ -45,10 +45,23 @@
       75%  { background: #505050; }
       100% { background: #505050; }
     }
+
+    .alert_flashing {
+      animation:
+        alertFlashing 0.5s infinite;
+    }
+
+    @keyframes alertFlashing{
+      0%   { background-color: #1a1a1a; }
+      25%  { background-color: #1a1a1a; }
+      50%  { background-color: #da3a36; }
+      75%  { background-color: #1a1a1a; }
+      100% { background-color: #1a1a1a; }
+    }
   </style>
 </head>
 
-<body class="dark-edition">
+<body class="dark-edition" id="main-background">
   <div class="wrapper">
     <div class="main-panel">
       <!-- Navbar -->
@@ -338,6 +351,71 @@
       console.log('Connection to websocket server closed.');
     });
 
+    function duration_to_secs(stamp) {
+      return (stamp.secs * 1e9 + stamp.nsecs) * 1e-9;
+    }
+
+    // ##################### Define alerts topics #####################
+    
+    var collision_topic = new ROSLIB.Topic({
+      ros: ros, name: '/delta/prediction/collision',
+      messageType: 'delta_msgs/CollisionDetection'
+    });
+    
+    // ################### Subscribe to alerts topics ###################
+
+    var audio_collision = new Audio('assets/alerts/collision.mp3');
+    var audio_failure = new Audio('assets/alerts/failure.mp3');
+
+    var alerts = {
+      'collision': {'audio': audio_collision, 'time_remaining': 0.0, 'play_interval': 2.0},
+      'failure': {'audio': audio_failure, 'time_remaining': 0.0, 'play_interval': 2.0}
+    }
+
+    function play_alert(audio) {
+      audio.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+      }, false);
+      audio.play();
+    }
+
+    function pause_alert(audio) {
+        audio.pause();
+    }
+
+    function alerts_handler() {
+      for (var key in alerts) {
+        if (alerts[key]['time_remaining'] <= 0) {
+          pause_alert(alerts[key]['audio']);
+          if (key == 'collision') {
+            document.getElementById('main-background').classList.remove('alert_flashing');
+          }
+        } else {
+          alerts[key]['time_remaining'] = Math.min(0, alerts[key]['time_remaining'] - 0.5);
+          play_alert(alerts[key]['audio']);
+          if (key == 'collision') {
+            document.getElementById('main-background').classList.add('alert_flashing');
+          }
+        }
+      }
+    }
+
+    function collision_event(msg) {
+      ttc = duration_to_secs(msg.time_to_impact);
+      probability = msg.probability;
+      if (probability > 0.5) {
+        alerts['collision']['time_remaining'] += alerts['collision']['play_interval'];
+      }
+    }
+
+    // Handle alerts
+    window.setInterval(function(){
+      alerts_handler();
+    }, 500);
+
+    collision_topic.subscribe(function(msg) { collision_event(msg); });
+
     // ################### Define diagnostics topics ###################
 
     var perception_diagnostics = new ROSLIB.Topic({
@@ -435,6 +513,7 @@
       }
     }
 
+    // Update FPS in GUI
     window.setInterval(function(){
       const pipelines = Object.keys(fps_dict)
       for (const pipeline of pipelines) {
