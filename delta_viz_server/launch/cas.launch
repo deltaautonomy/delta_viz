@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    
+    <!-- *********************** CARLA ROS BRIDGE *********************** -->
+
+    <!-- Launch Carla ROS bridge with RADAR -->
+    <include file="$(find carla_ros_bridge)/launch/carla_ros_bridge_with_radar.launch" />
+
+    <!-- *********************** PERCEPTION *********************** -->
+    
+    <!-- Run the object detection node -->
+    <node
+        pkg="delta_perception"
+        type="main.py"
+        name="object_detection"
+        output="screen">
+    </node>
+
+    <!-- Run the lane detection node -->
+    <node
+        pkg="delta_perception"
+        type="lane_detection.py"
+        name="lane_detection"
+        output="screen">
+    </node>
+
+    <!-- *********************** TRACKING FUSION *********************** -->
+    
+    <node
+        pkg="delta_tracking_fusion"
+        type="main.py"
+        name="tracking_fusion"
+        output="screen">
+    </node>
+
+    <!-- *********************** PREDICTION *********************** -->
+    
+    <!-- Run the ego prediction node -->
+    <node   
+        pkg="delta_prediction"
+        type="ego_trajectory_subscriber.py"
+        name="ego_trajectory_prediction"
+        output="screen">
+    </node>
+
+    <!-- Run the oncoming prediction node -->
+    <node   
+        pkg="delta_prediction"
+        type="oncoming_trajectory_prediction.py"
+        name="oncoming_trajectory_prediction"
+        output="screen">
+    </node>
+
+    <!-- Run the collision prediction node -->
+    <node   
+        pkg="delta_prediction"
+        type="collision_detection.py"
+        name="collision_detection"
+        output="screen">
+    </node>
+    
+    <!-- *********************** PLANNING CONTROLS *********************** -->
+    
+    <node
+        pkg="delta_planning_controls"
+        type="delta_planning_controls_node"
+        name="planning_controls"
+        output="screen"
+        required="true">
+        <rosparam file="$(find delta_planning_controls)/params/PID.yaml" command="load"/>
+        <remap from="/delta/planning_controls/controls" to="/carla/ego_vehicle/vehicle_control_cmd"/>
+    </node>
+
+</launch>

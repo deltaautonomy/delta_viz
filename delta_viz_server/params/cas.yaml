@@ -1,0 +1,3 @@
+delta_prediction:
+  oncoming_validation_folder: /mnt/data/Workspaces/delta_workspace/src/delta_prediction/validation_dataset'
+  oncoming_validation_file: oncoming_vehicle

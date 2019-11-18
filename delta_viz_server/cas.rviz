@@ -25,6 +25,8 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: CameraPub Image
+Toolbars:
+  toolButtonStyle: 2
 Visualization Manager:
   Class: ""
   Displays:
@@ -63,13 +65,13 @@ Visualization Manager:
       Unreliable: false
       Value: true
     - Class: rviz/Marker
-      Enabled: true
+      Enabled: false
       Marker Topic: /carla/vehicle_marker
       Name: Carla Vehicle Marker
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
-      Value: true
+      Value: false
     - Class: rviz/Marker
       Enabled: true
       Marker Topic: /delta/perception/camera_track_marker
@@ -91,7 +93,7 @@ Visualization Manager:
       Marker Topic: /delta/tracking_fusion/tracker/track_id_marker
       Name: Track ID Label
       Namespaces:
-        {}
+        "": true
       Queue Size: 100
       Value: true
     - Class: jsk_rviz_plugin/PictogramArray
@@ -103,7 +105,7 @@ Visualization Manager:
     - Class: rviz/Marker
       Enabled: true
       Marker Topic: /delta/prediction/ego
-      Name: Ego Prediction Trajectory
+      Name: Ego Vehicle Prediction
       Namespaces:
         predicted_trajectory: true
       Queue Size: 100
@@ -113,19 +115,35 @@ Visualization Manager:
       Marker Topic: /delta/tracking_fusion/tracker/trajectory_marker
       Name: On-Coming Vehicles Trajectory
       Namespaces:
+        "": true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /delta/prediction/ground_truth
+      Name: On-Coming Vehicle Prediction
+      Namespaces:
         {}
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /delta/planning_controls/ego_vehicle/evasive_trajectory
+      Name: Evasive Trajectory
+      Namespaces:
+        evasive_trajectory: true
       Queue Size: 100
       Value: true
     - Alpha: 0.699999988
       Class: rviz/Map
       Color Scheme: raw
       Draw Behind: true
-      Enabled: false
+      Enabled: true
       Name: Occupancy Grid (Tracking)
       Topic: /delta/tracking_fusion/tracker/occupancy_grid
       Unreliable: false
       Use Timestamp: false
-      Value: false
+      Value: true
     - Alpha: 0.699999988
       Class: rviz/Map
       Color Scheme: raw
@@ -152,10 +170,12 @@ Visualization Manager:
         CameraPub Image: false
         Carla Vehicle Marker: true
         Class Label (Icon): true
-        Ego Prediction Trajectory: true
+        Ego Vehicle Prediction: true
+        Evasive Trajectory: true
         Occupancy Grid (Perception): true
         Occupancy Grid (Tracking): true
         Odometry: false
+        On-Coming Vehicle Prediction: true
         On-Coming Vehicles Trajectory: true
         Radar Track Marker: true
         Track ID Label: true
@@ -194,7 +214,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        trailer_head:
+        trailer_full:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -269,4 +289,4 @@ Window Geometry:
     collapsed: true
   Width: 1857
   X: 63
-  Y: 24
+  Y: 384

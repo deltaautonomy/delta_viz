@@ -248,7 +248,7 @@
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="#right_tab2" data-toggle="tab" onclick="right_tab2_onclick()">
-                            <i class="material-icons">filter_2</i> Tracking
+                            <i class="material-icons">filter_2</i> Lane Detection
                             <div class="ripple-container"></div>
                           </a>
                         </li>
@@ -268,7 +268,7 @@
                       <img id="right_stream1" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
                     </div>
                     <div class="tab-pane" id="right_tab2">
-                      <img id="right_stream2" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                      <img id="right_stream2" style='height: 100%; width: 100%; object-fit: contain; transform: rotate(90deg)' src="assets/img/placeholder.png">
                     </div>
                     <div class="tab-pane" id="right_tab3">
                       <img id="right_stream3" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
@@ -360,6 +360,11 @@
       messageType: 'diagnostic_msgs/DiagnosticArray'
     });
 
+    var prediction_oncoming_diagnostics = new ROSLIB.Topic({
+      ros: ros, name: '/delta/prediction/oncoming_vehicle/diagnostics',
+      messageType: 'diagnostic_msgs/DiagnosticArray'
+    });
+
     var planning_diagnostics = new ROSLIB.Topic({
       ros: ros, name: '/delta/planning_controls/ego_vehicle/diagnostics',
       messageType: 'diagnostic_msgs/DiagnosticArray'
@@ -393,6 +398,7 @@
     lane_diagnostics.subscribe(function(msg) { update_fps(msg); });
     tracking_diagnostics.subscribe(function(msg) { update_fps(msg); });
     prediction_diagnostics.subscribe(function(msg) { update_fps(msg); });
+    prediction_oncoming_diagnostics.subscribe(function(msg) { update_fps(msg); });
     planning_diagnostics.subscribe(function(msg) { update_fps(msg); });
 
     // ################### Update FPS in GUI ###################

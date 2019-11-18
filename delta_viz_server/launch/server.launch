@@ -10,28 +10,15 @@
         <arg name="gui" value="false" />
     </include>
 
-    <!-- Run nodes -->
-    <!-- Run the object detection node -->
-    <!-- <node
-        pkg="delta_perception"
-        type="main.py"
-        name="main"
-        output="screen">
-    </node>
- -->
-    <!-- <node
-        pkg="delta_tracking_fusion"
-        type="main.py"
-        name="main_tracking"
-        output="screen">
-    </node> -->
+    <!-- Run collision avoidance system -->
+    <include file="$(find delta_viz_server)/launch/cas.launch" />
 
     <!-- Generate compressed images -->
     <include file="$(find delta_viz_server)/launch/compressed_images.launch" />
 
     <!-- Launch Rviz -->
     <node
-        type="rviz" name="rviz" pkg="rviz" args="-d $(find delta_viz_server)/test.rviz">
+        type="rviz" name="rviz" pkg="rviz" args="-d $(find delta_viz_server)/cas.rviz">
     </node>
 
     <!-- Launch socket rosbridge server -->
