@@ -77,7 +77,7 @@ Visualization Manager:
       Marker Topic: /delta/perception/camera_track_marker
       Name: Camera Track Marker
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -118,12 +118,12 @@ Visualization Manager:
         "": true
       Queue Size: 100
       Value: true
-    - Class: rviz/Marker
+    - Class: rviz/MarkerArray
       Enabled: true
-      Marker Topic: /delta/prediction/ground_truth
-      Name: On-Coming Vehicle Prediction
+      Marker Topic: /delta/prediction/oncoming_vehicle/visualization
+      Name: On-Coming Vehicles Prediction
       Namespaces:
-        {}
+        "": true
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -175,7 +175,7 @@ Visualization Manager:
         Occupancy Grid (Perception): true
         Occupancy Grid (Tracking): true
         Odometry: false
-        On-Coming Vehicle Prediction: true
+        On-Coming Vehicles Prediction: true
         On-Coming Vehicles Trajectory: true
         Radar Track Marker: true
         Track ID Label: true

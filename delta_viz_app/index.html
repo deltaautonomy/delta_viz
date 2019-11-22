@@ -452,6 +452,7 @@
 
     var initial_date = new Date();
     var initial_time = initial_date.getTime() / 1000;
+    var update_alpha = 0.75;
 
     var fps_dict = {
       'perception': {'limit': 10.0, 'last_time': initial_time, 'count': 0.0, 'delta': 0.0, 'fps': 0.0},
@@ -467,7 +468,8 @@
         fps_dict[pipeline]['delta'] += 1 / parseFloat(msg.status[i].message);
       }
       fps_dict[pipeline]['count'] += 1;
-      fps_dict[pipeline]['fps'] = (fps_dict[pipeline]['count'] / fps_dict[pipeline]['delta']);
+      fps_dict[pipeline]['fps'] = update_alpha * fps_dict[pipeline]['fps'] + 
+        (1 - update_alpha) * (fps_dict[pipeline]['count'] / fps_dict[pipeline]['delta']);
       fps_dict[pipeline]['last_time'] = date.getTime() / 1000;
       // fps_dict[pipeline]['last_time'] = (msg.header.stamp.secs * 10e9 + msg.header.stamp.nsecs) / 10e9;
     }

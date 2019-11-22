@@ -4,8 +4,8 @@
     <!-- *********************** CARLA ROS BRIDGE *********************** -->
 
     <!-- Launch Carla ROS bridge with RADAR -->
-    <include file="$(find carla_ros_bridge)/launch/carla_ros_bridge_with_radar.launch" />
-
+<!--     <include file="$(find carla_ros_bridge)/launch/carla_ros_bridge_with_radar.launch" />
+ -->
     <!-- *********************** PERCEPTION *********************** -->
     
     <!-- Run the object detection node -->
@@ -68,7 +68,7 @@
         output="screen"
         required="true">
         <rosparam file="$(find delta_planning_controls)/params/PID.yaml" command="load"/>
-        <remap from="/delta/planning_controls/controls" to="/carla/ego_vehicle/vehicle_control_cmd"/>
+        <remap from="/delta/planning_controls/ego_vehicle/controls" to="/carla/ego_vehicle/vehicle_control_cmd"/>
     </node>
 
 </launch>
