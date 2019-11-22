@@ -1,3 +1,6 @@
 [submodule "rviz_camera_stream"]
 	path = rviz_camera_stream
 	url = https://github.com/lucasw/rviz_camera_stream.git
+[submodule "rviz_lighting"]
+	path = rviz_lighting
+	url = https://github.com/mogumbo/rviz_lighting.git
