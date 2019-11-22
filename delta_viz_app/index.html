@@ -3,6 +3,7 @@
 
 <head>
   <title>DeltaViz</title>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -15,15 +16,28 @@
 
   <!-- Custom CSS -->
   <style type="text/css">
-    .blinking {
+    .green-light {
       animation:
-        blinkingText 2s infinite;
+        greenLight 1s infinite;
     }
 
-    @keyframes blinkingText{
+    @keyframes greenLight{
       0%   { color: #303030; }
       25%  { color: #303030; }
       50%  { color: #4ea752; }
+      75%  { color: #303030; }
+      100% { color: #303030; }
+    }
+
+    .red-light {
+      animation:
+        redLight 1s infinite;
+    }
+
+    @keyframes redLight{
+      0%   { color: #303030; }
+      25%  { color: #303030; }
+      50%  { color: #da3a36; }
       75%  { color: #303030; }
       100% { color: #303030; }
     }
@@ -46,7 +60,7 @@
       100% { background: #505050; }
     }
 
-    .alert_flashing {
+    .alert-flashing {
       animation:
         alertFlashing 0.5s infinite;
     }
@@ -69,7 +83,7 @@
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <a class="navbar-brand" href="javascript:void(0)">
-              <i id="cas_active" class="material-icons blinking">fiber_manual_record</i>
+              <i id="cas-active" class="material-icons red-light">fiber_manual_record</i>
               Collision Avoidance System Dashboard
             </a>
           </div>
@@ -221,8 +235,14 @@
                           </a>
                         </li>
                         <li class="nav-item">
+                          <a class="nav-link" href="#left_tab4" data-toggle="tab" onclick="left_tab4_onclick()">
+                            <i class="material-icons">filter_3</i> Left View
+                            <div class="ripple-container"></div>
+                          </a>
+                        </li>
+                        <li class="nav-item">
                           <a class="nav-link" href="#left_tab3" data-toggle="tab" onclick="left_tab3_onclick()">
-                            <i class="material-icons">filter_3</i> Side View
+                            <i class="material-icons">filter_4</i> Right View
                             <div class="ripple-container"></div>
                           </a>
                         </li>
@@ -233,13 +253,24 @@
                 <div class="card-body">
                   <div class="tab-content">
                     <div class="tab-pane active" id="left_tab1">
-                      <img id="left_stream1" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                      <img id="left_stream1" style='height: 100%; width: 100%; object-fit: contain'
+                        src="assets/img/placeholder.png">
+                        <!-- src="http://localhost:8080/stream_viewer?topic=/stream1/image"> -->
                     </div>
                     <div class="tab-pane" id="left_tab2">
-                      <img id="left_stream2" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                      <img id="left_stream2" style='height: 100%; width: 100%; object-fit: contain'
+                        src="assets/img/placeholder.png">
+                        <!-- src="http://localhost:8080/stream_viewer?topic=/stream2/image"> -->
                     </div>
                     <div class="tab-pane" id="left_tab3">
-                      <img id="left_stream3" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                      <img id="left_stream3" style='height: 100%; width: 100%; object-fit: contain'
+                        src="assets/img/placeholder.png">
+                        <!-- src="http://localhost:8080/stream_viewer?topic=/stream3/image"> -->
+                    </div>
+                    <div class="tab-pane" id="left_tab4">
+                      <img id="left_stream4" style='height: 100%; width: 100%; object-fit: contain'
+                        src="assets/img/placeholder.png">
+                        <!-- src="http://localhost:8080/stream_viewer?topic=/stream4/image"> -->
                     </div>
                   </div>
                 </div>
@@ -278,13 +309,16 @@
                 <div class="card-body">
                   <div class="tab-content">
                     <div class="tab-pane active" id="right_tab1">
-                      <img id="right_stream1" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                      <img id="right_stream1" style='height: 100%; width: 100%; object-fit: contain'
+                        src="assets/img/placeholder.png">
                     </div>
                     <div class="tab-pane" id="right_tab2">
-                      <img id="right_stream2" style='height: 100%; width: 100%; object-fit: contain; transform: rotate(90deg)' src="assets/img/placeholder.png">
+                      <img id="right_stream2" style='height: 100%; width: 100%; object-fit: contain'
+                        src="assets/img/placeholder.png">
                     </div>
                     <div class="tab-pane" id="right_tab3">
-                      <img id="right_stream3" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">
+                      <img id="right_stream3" style='height: 100%; width: 100%; object-fit: contain'
+                        src="assets/img/placeholder.png">
                     </div>
                   </div>
                 </div>
@@ -329,47 +363,68 @@
   <!-- ROS interface -->
   <script type="text/javascript" type="text/javascript">
 
-    // ################### Connecting to ROS ###################
+    // ####################### Commons ########################
 
-    var ros = new ROSLIB.Ros({
-      url : 'ws://localhost:9090'
-    });
-    // TODO: flash off
-
-    ros.on('connection', function() {
-      // TODO: flash connected
-      console.log('Connected to websocket server.');
-    });
-
-    ros.on('error', function(error) {
-      // TODO: flash error
-      console.log('Error connecting to websocket server: ', error);
-    });
-
-    ros.on('close', function() {
-      // TODO: flash off
-      console.log('Connection to websocket server closed.');
-    });
+    window.onload = function() {
+      console.log('Onload');
+    };
 
     function duration_to_secs(stamp) {
       return (stamp.secs * 1e9 + stamp.nsecs) * 1e-9;
     }
 
+    // ################### Connecting to ROS ###################
+
+    var rosbridge_url = 'ws://localhost:9090';
+
+    var ros = new ROSLIB.Ros({
+      url : rosbridge_url
+    });
+
+    ros.on('connection', function() {
+      document.getElementById('cas-active').classList.remove('red-light');
+      document.getElementById('cas-active').classList.add('green-light');
+      console.log('Connected to websocket server.');
+
+      left_tab1_onclick();
+      right_tab1_onclick();
+    });
+
+    ros.on('error', function(error) {
+      document.getElementById('cas-active').classList.remove('green-light');
+      document.getElementById('cas-active').classList.add('red-light');
+      console.log('Error connecting to websocket server: ', error);
+    });
+
+    ros.on('close', function() {
+      document.getElementById('cas-active').classList.remove('green-light');
+      document.getElementById('cas-active').classList.add('red-light');
+      console.log('Connection to websocket server closed.');
+    });
+
+    // Handle ROS connection
+    window.setInterval(function(){
+      if (ros.isConnected) return;
+      console.log(ros.isConnected);
+      ros.connect(rosbridge_url);
+    }, 1000);
+
     // ##################### Define alerts topics #####################
-    
+
     var collision_topic = new ROSLIB.Topic({
       ros: ros, name: '/delta/prediction/collision',
       messageType: 'delta_msgs/CollisionDetection'
     });
-    
+
     // ################### Subscribe to alerts topics ###################
 
     var audio_collision = new Audio('assets/alerts/collision.mp3');
     var audio_failure = new Audio('assets/alerts/failure.mp3');
 
     var alerts = {
-      'collision': {'audio': audio_collision, 'time_remaining': 0.0, 'play_interval': 2.0},
-      'failure': {'audio': audio_failure, 'time_remaining': 0.0, 'play_interval': 2.0}
+      'collision': {'audio': audio_collision, 'time_remaining': 0.0, 'play_interval': 5.0},
+      'failure': {'audio': audio_failure, 'time_remaining': 0.0, 'play_interval': 5.0}
+      // 'failure': {'audio': audio_failure, 'time_remaining': 0.0, 'play_interval': 5.0}
     }
 
     function play_alert(audio) {
@@ -387,23 +442,28 @@
     function alerts_handler() {
       for (var key in alerts) {
         if (alerts[key]['time_remaining'] <= 0) {
-          pause_alert(alerts[key]['audio']);
-          if (key == 'collision') {
-            document.getElementById('main-background').classList.remove('alert_flashing');
+          switch (key) {
+            case 'failure':
+            case 'collision':
+              pause_alert(alerts[key]['audio']);
+              document.getElementById('main-background').classList.remove('alert-flashing'); break;
           }
         } else {
           alerts[key]['time_remaining'] = Math.min(0, alerts[key]['time_remaining'] - 0.5);
           play_alert(alerts[key]['audio']);
-          if (key == 'collision') {
-            document.getElementById('main-background').classList.add('alert_flashing');
+          switch (key) {
+            case 'collision':
+              document.getElementById('main-background').classList.add('alert-flashing'); break
+            case 'failure':
+              document.getElementById('main-background').classList.add('alert-flashing'); break
           }
         }
       }
     }
 
     function collision_event(msg) {
-      ttc = duration_to_secs(msg.time_to_impact);
-      probability = msg.probability;
+      var ttc = duration_to_secs(msg.time_to_impact);
+      var probability = msg.probability;
       if (probability > 0.5) {
         alerts['collision']['time_remaining'] += alerts['collision']['play_interval'];
       }
@@ -541,6 +601,11 @@
       messageType: 'sensor_msgs/CompressedImage'
     });
 
+    var rviz_stream4 = new ROSLIB.Topic({
+      ros: ros, name: '/stream4/image/compressed',
+      messageType: 'sensor_msgs/CompressedImage'
+    });
+
     var object_detection_topic = new ROSLIB.Topic({
       ros: ros, name: '/delta/visualization/images/object_detection/compressed',
       messageType: 'sensor_msgs/CompressedImage'
@@ -552,7 +617,7 @@
     });
 
     // ################### Subscribe to image topics ###################
-  
+
     var left_stream = undefined;
     var right_stream = undefined;
 
@@ -561,7 +626,6 @@
       if (left_stream != undefined) left_stream.unsubscribe();
       left_stream = rviz_stream1;
       rviz_stream1.subscribe(function(message) {
-        // console.log('Received message on ' + rviz_stream1.name + ': ');
         document.getElementById('left_stream1').src = "data:image/jpg;base64," + message.data;
       });
     }
@@ -571,7 +635,6 @@
       if (left_stream != undefined) left_stream.unsubscribe();
       left_stream = rviz_stream2;
       rviz_stream2.subscribe(function(message) {
-        // console.log('Received message on ' + rviz_stream2.name + ': ');
         document.getElementById('left_stream2').src = "data:image/jpg;base64," + message.data;
       });
     }
@@ -581,8 +644,16 @@
       if (left_stream != undefined) left_stream.unsubscribe();
       left_stream = rviz_stream3;
       rviz_stream3.subscribe(function(message) {
-        // console.log('Received message on ' + rviz_stream3.name + ': ');
         document.getElementById('left_stream3').src = "data:image/jpg;base64," + message.data;
+      });
+    }
+
+    function left_tab4_onclick() {
+      console.log('left tab 4');
+      if (left_stream != undefined) left_stream.unsubscribe();
+      left_stream = rviz_stream4;
+      rviz_stream4.subscribe(function(message) {
+        document.getElementById('left_stream4').src = "data:image/jpg;base64," + message.data;
       });
     }
 
@@ -591,7 +662,6 @@
       if (right_stream != undefined) right_stream.unsubscribe();
       right_stream = object_detection_topic;
       object_detection_topic.subscribe(function(message) {
-        // console.log('Received message on ' + object_detection_topic.name + ': ');
         document.getElementById('right_stream1').src = "data:image/jpg;base64," + message.data;
       });
     }
@@ -601,7 +671,6 @@
       if (right_stream != undefined) right_stream.unsubscribe();
       right_stream = lane_detection_topic;
       lane_detection_topic.subscribe(function(message) {
-        // console.log('Received message on ' + lane_detection_topic.name + ': ');
         document.getElementById('right_stream2').src = "data:image/jpg;base64," + message.data;
       });
     }

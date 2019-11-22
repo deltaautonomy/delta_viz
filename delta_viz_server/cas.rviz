@@ -1,11 +1,11 @@
 Panels:
   - Class: rviz/Displays
-    Help Height: 78
+    Help Height: 0
     Name: Displays
     Property Tree Widget:
       Expanded: ~
       Splitter Ratio: 0.5
-    Tree Height: 328
+    Tree Height: 524
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -25,8 +25,6 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: CameraPub Image
-Toolbars:
-  toolButtonStyle: 2
 Visualization Manager:
   Class: ""
   Displays:
@@ -131,7 +129,7 @@ Visualization Manager:
       Marker Topic: /delta/planning_controls/ego_vehicle/evasive_trajectory
       Name: Evasive Trajectory
       Namespaces:
-        evasive_trajectory: true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 0.699999988
@@ -154,36 +152,9 @@ Visualization Manager:
       Unreliable: false
       Use Timestamp: false
       Value: true
-    - Background Color: 48; 48; 48
-      Camera Info Topic: /stream1/camera_info
-      Class: rviz_camera_stream/CameraPub
-      Display namespace: /stream1
-      Enabled: true
-      Frame Rate: -1
-      Image Topic: /stream1/image
-      Name: CameraPub
-      Queue Size: 2
-      Value: true
-      Visibility:
-        Camera Track Marker: true
-        CameraPub Axes: false
-        CameraPub Image: false
-        Carla Vehicle Marker: true
-        Class Label (Icon): true
-        Ego Vehicle Prediction: true
-        Evasive Trajectory: true
-        Occupancy Grid (Perception): true
-        Occupancy Grid (Tracking): true
-        Odometry: false
-        On-Coming Vehicles Prediction: true
-        On-Coming Vehicles Trajectory: true
-        Radar Track Marker: true
-        Track ID Label: true
-        Trailer Model: true
-        Value: true
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /stream1/image
+      Image Topic: /stream2/image
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -192,13 +163,6 @@ Visualization Manager:
       Queue Size: 2
       Transport Hint: raw
       Unreliable: false
-      Value: true
-    - Class: rviz/Axes
-      Enabled: true
-      Length: 1
-      Name: CameraPub Axes
-      Radius: 0.100000001
-      Reference Frame: stream1
       Value: true
     - Alpha: 1
       Class: rviz/RobotModel
@@ -225,6 +189,210 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Background Color: 48; 48; 48
+      Camera Info Topic: /stream1/camera_info
+      Class: rviz_camera_stream/CameraPub
+      Display namespace: /stream1
+      Enabled: true
+      Frame Rate: -1
+      Image Topic: /stream1/image
+      Name: CameraPub 1
+      Queue Size: 2
+      Value: true
+      Visibility:
+        Camera Track Marker: true
+        CameraPub 2: false
+        CameraPub 3: false
+        CameraPub 4: false
+        CameraPub Axes 1: false
+        CameraPub Axes 2: false
+        CameraPub Axes 3: false
+        CameraPub Axes 4: false
+        CameraPub Image: false
+        Carla Vehicle Marker: true
+        Class Label (Icon): true
+        Ego Vehicle Prediction: true
+        Evasive Trajectory: true
+        Light 1: true
+        Light 2: true
+        Occupancy Grid (Perception): false
+        Occupancy Grid (Tracking): true
+        Odometry: false
+        On-Coming Vehicle Prediction: true
+        On-Coming Vehicles Trajectory: true
+        Radar Track Marker: true
+        Track ID Label: true
+        Trailer Model: true
+        Value: true
+    - Background Color: 48; 48; 48
+      Camera Info Topic: /stream2/camera_info
+      Class: rviz_camera_stream/CameraPub
+      Display namespace: /stream2
+      Enabled: true
+      Frame Rate: -1
+      Image Topic: /stream2/image
+      Name: CameraPub 2
+      Queue Size: 2
+      Value: true
+      Visibility:
+        Camera Track Marker: true
+        CameraPub 1: false
+        CameraPub 3: false
+        CameraPub 4: false
+        CameraPub Axes 1: false
+        CameraPub Axes 2: false
+        CameraPub Axes 3: false
+        CameraPub Axes 4: false
+        CameraPub Image: false
+        Carla Vehicle Marker: true
+        Class Label (Icon): true
+        Ego Vehicle Prediction: true
+        Evasive Trajectory: true
+        Light 1: true
+        Light 2: true
+        Occupancy Grid (Perception): false
+        Occupancy Grid (Tracking): true
+        Odometry: false
+        On-Coming Vehicle Prediction: true
+        On-Coming Vehicles Trajectory: true
+        Radar Track Marker: true
+        Track ID Label: true
+        Trailer Model: true
+        Value: true
+    - Background Color: 48; 48; 48
+      Camera Info Topic: /stream3/camera_info
+      Class: rviz_camera_stream/CameraPub
+      Display namespace: /stream3
+      Enabled: true
+      Frame Rate: -1
+      Image Topic: /stream3/image
+      Name: CameraPub 3
+      Queue Size: 2
+      Value: true
+      Visibility:
+        Camera Track Marker: false
+        CameraPub 1: true
+        CameraPub 2: true
+        CameraPub 4: true
+        CameraPub Axes 1: true
+        CameraPub Axes 2: true
+        CameraPub Axes 3: true
+        CameraPub Axes 4: true
+        CameraPub Image: true
+        Carla Vehicle Marker: true
+        Class Label (Icon): true
+        Ego Vehicle Prediction: true
+        Evasive Trajectory: true
+        Light 1: true
+        Light 2: true
+        Occupancy Grid (Perception): false
+        Occupancy Grid (Tracking): true
+        Odometry: false
+        On-Coming Vehicle Prediction: true
+        On-Coming Vehicles Trajectory: true
+        Radar Track Marker: true
+        Track ID Label: true
+        Trailer Model: true
+        Value: true
+    - Background Color: 48; 48; 48
+      Camera Info Topic: /stream4/camera_info
+      Class: rviz_camera_stream/CameraPub
+      Display namespace: /stream4
+      Enabled: true
+      Frame Rate: -1
+      Image Topic: /stream4/image
+      Name: CameraPub 4
+      Queue Size: 2
+      Value: true
+      Visibility:
+        Camera Track Marker: false
+        CameraPub 1: false
+        CameraPub 2: false
+        CameraPub 3: false
+        CameraPub Axes 1: false
+        CameraPub Axes 2: false
+        CameraPub Axes 3: false
+        CameraPub Axes 4: false
+        CameraPub Image: false
+        Carla Vehicle Marker: true
+        Class Label (Icon): true
+        Ego Vehicle Prediction: true
+        Evasive Trajectory: true
+        Light 1: true
+        Light 2: true
+        Occupancy Grid (Perception): false
+        Occupancy Grid (Tracking): true
+        Odometry: false
+        On-Coming Vehicle Prediction: true
+        On-Coming Vehicles Trajectory: true
+        Radar Track Marker: true
+        Track ID Label: true
+        Trailer Model: true
+        Value: true
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 0.5
+      Name: CameraPub Axes 1
+      Radius: 0.0500000007
+      Reference Frame: stream1
+      Value: true
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 0.5
+      Name: CameraPub Axes 2
+      Radius: 0.0500000007
+      Reference Frame: stream2
+      Value: true
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 0.5
+      Name: CameraPub Axes 3
+      Radius: 0.0500000007
+      Reference Frame: stream3
+      Value: true
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 0.5
+      Name: CameraPub Axes 4
+      Radius: 0.0500000007
+      Reference Frame: stream4
+      Value: true
+    - Class: rviz_lighting/Light
+      Diffuse Color: 255; 255; 255
+      Direction:
+        X: -1
+        Y: -1
+        Z: -1
+      Enabled: true
+      Falloff: 1
+      Light Type: Directional
+      Name: Light 1
+      Outer Angle: 0.5
+      Position:
+        X: 0
+        Y: 0
+        Z: 0
+      Reference Frame: stream4
+      Specular Color: 255; 255; 255
+      Value: true
+    - Class: rviz_lighting/Light
+      Diffuse Color: 255; 255; 255
+      Direction:
+        X: -1
+        Y: -1
+        Z: -1
+      Enabled: true
+      Falloff: 1
+      Light Type: Directional
+      Name: Light 2
+      Outer Angle: 0.5
+      Position:
+        X: 0
+        Y: 0
+        Z: 0
+      Reference Frame: ego_vehicle
+      Specular Color: 255; 255; 255
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -250,7 +418,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 28.9064045
+      Distance: 36.0642853
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -278,7 +446,7 @@ Window Geometry:
   Height: 1028
   Hide Left Dock: false
   Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd0000000400000000000002a80000037afc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006100fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000028000001d7000000d700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001e00430061006d00650072006100500075006200200049006d00610067006501000002050000019d0000001600ffffff00000001000001ac00000396fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000002800000396000000ad00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007410000003efc0100000002fb0000000800540069006d00650100000000000007410000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000004930000037a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000040000000000000251000003befc020000000afb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006100fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000000280000024d000000d700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001e00430061006d00650072006100500075006200200049006d006100670065010000027b0000016b0000001600fffffffb0000000c00430061006d006500720061000000038c00000016000000000000000000000001000001ac00000396fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000002800000396000000ad00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007410000003efc0100000002fb0000000800540069006d00650000000000000007410000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000004ea000003be00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -289,4 +457,4 @@ Window Geometry:
     collapsed: true
   Width: 1857
   X: 63
-  Y: 384
+  Y: 24
