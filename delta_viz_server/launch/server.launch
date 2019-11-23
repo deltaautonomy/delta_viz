@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
     <!-- Play rosbag record -->
-    <include file="$(find delta_perception)/launch/play_rosbag.launch">
+    <!-- <include file="$(find delta_perception)/launch/play_rosbag.launch">
         <arg name="filename" value="$(find delta_viz_server)/test_viz.bag" />
-    </include>
+    </include> -->
 
     <!-- Launch socket rosbridge server -->
     <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
@@ -14,7 +14,7 @@
     </include>
 
     <!-- Run collision avoidance system -->
-    <!-- <include file="$(find delta_viz_server)/launch/cas.launch" /> -->
+    <include file="$(find delta_viz_server)/launch/cas.launch" />
 
     <!-- Generate compressed images -->
     <include file="$(find delta_viz_server)/launch/compressed_images.launch" />

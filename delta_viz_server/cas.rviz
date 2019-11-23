@@ -25,43 +25,11 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: CameraPub Image
+Toolbars:
+  toolButtonStyle: 2
 Visualization Manager:
   Class: ""
   Displays:
-    - Angle Tolerance: 0.100000001
-      Class: rviz/Odometry
-      Covariance:
-        Orientation:
-          Alpha: 0.5
-          Color: 255; 255; 127
-          Color Style: Unique
-          Frame: Local
-          Offset: 1
-          Scale: 1
-          Value: true
-        Position:
-          Alpha: 0.300000012
-          Color: 204; 51; 204
-          Scale: 1
-          Value: true
-        Value: true
-      Enabled: true
-      Keep: 100
-      Name: Odometry
-      Position Tolerance: 0.100000001
-      Shape:
-        Alpha: 1
-        Axes Length: 1
-        Axes Radius: 0.100000001
-        Color: 255; 25; 0
-        Head Length: 0.300000012
-        Head Radius: 0.100000001
-        Shaft Length: 1
-        Shaft Radius: 0.0500000007
-        Value: Arrow
-      Topic: /carla/ego_vehicle/odometry
-      Unreliable: false
-      Value: true
     - Class: rviz/Marker
       Enabled: false
       Marker Topic: /carla/vehicle_marker
@@ -75,7 +43,7 @@ Visualization Manager:
       Marker Topic: /delta/perception/camera_track_marker
       Name: Camera Track Marker
       Namespaces:
-        {}
+        "": true
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -129,7 +97,7 @@ Visualization Manager:
       Marker Topic: /delta/planning_controls/ego_vehicle/evasive_trajectory
       Name: Evasive Trajectory
       Namespaces:
-        {}
+        evasive_trajectory: true
       Queue Size: 100
       Value: true
     - Alpha: 0.699999988
@@ -217,8 +185,7 @@ Visualization Manager:
         Light 2: true
         Occupancy Grid (Perception): false
         Occupancy Grid (Tracking): true
-        Odometry: false
-        On-Coming Vehicle Prediction: true
+        On-Coming Vehicles Prediction: true
         On-Coming Vehicles Trajectory: true
         Radar Track Marker: true
         Track ID Label: true
@@ -252,8 +219,7 @@ Visualization Manager:
         Light 2: true
         Occupancy Grid (Perception): false
         Occupancy Grid (Tracking): true
-        Odometry: false
-        On-Coming Vehicle Prediction: true
+        On-Coming Vehicles Prediction: true
         On-Coming Vehicles Trajectory: true
         Radar Track Marker: true
         Track ID Label: true
@@ -287,8 +253,7 @@ Visualization Manager:
         Light 2: true
         Occupancy Grid (Perception): false
         Occupancy Grid (Tracking): true
-        Odometry: false
-        On-Coming Vehicle Prediction: true
+        On-Coming Vehicles Prediction: true
         On-Coming Vehicles Trajectory: true
         Radar Track Marker: true
         Track ID Label: true
@@ -322,8 +287,7 @@ Visualization Manager:
         Light 2: true
         Occupancy Grid (Perception): false
         Occupancy Grid (Tracking): true
-        Odometry: false
-        On-Coming Vehicle Prediction: true
+        On-Coming Vehicles Prediction: true
         On-Coming Vehicles Trajectory: true
         Radar Track Marker: true
         Track ID Label: true
@@ -457,4 +421,4 @@ Window Geometry:
     collapsed: true
   Width: 1857
   X: 63
-  Y: 24
+  Y: 384
