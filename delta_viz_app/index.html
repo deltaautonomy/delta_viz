@@ -42,9 +42,9 @@
       100% { color: #303030; }
     }
 
-    .dark-edition .card .danger_flashing .card-icon,
-    .dark-edition .card .danger_flashing .card-text,
-    .dark-edition .card .danger_flashing:not(.card-header-icon):not(.card-header-text),
+    .dark-edition .card .danger-flashing .card-icon,
+    .dark-edition .card .danger-flashing .card-text,
+    .dark-edition .card .danger-flashing:not(.card-header-icon):not(.card-header-text),
     .dark-edition .card.bg-danger,
     .dark-edition .card.card-rotate.bg-danger .front,
     .dark-edition .card.card-rotate.bg-danger .back {
@@ -99,45 +99,45 @@
           <div class="row">
             <div class="col-xl-4 col-lg-12">
               <div class="card card-chart">
-                <div class="card-header card-header-success">
+                <div id="camera-status" class="card-header card-header-warning">
                   <h4 class="card-title">Camera Stream</h4>
                 </div>
                 <div class="card-body" style="padding: 10px">
-                  <!-- <p class="card-category">Running Successfully</p> -->
+                  <!-- <p class="card-category">Not Connected</p> -->
                 </div>
                 <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> Running Successfully
+                  <div id="camera-status-desc" class="stats">
+                    <i class="material-icons">error</i> Not Connected
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-xl-4 col-lg-12">
               <div class="card card-chart">
-                <div class="card-header card-header-warning">
+                <div id="radar-status" class="card-header card-header-warning">
                   <h4 class="card-title">RADAR Stream</h4>
                 </div>
                 <div class="card-body" style="padding: 10px">
-                  <!-- <p class="card-category">Running Successfully</p> -->
+                  <!-- <p class="card-category">Not Connected</p> -->
                 </div>
                 <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> Running Successfully
+                  <div id="radar-status-desc" class="stats">
+                    <i class="material-icons">error</i> Not Connected
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-xl-4 col-lg-12">
               <div class="card card-chart">
-                <div class="card-header card-header-danger">
+                <div id="system-status" class="card-header card-header-warning">
                   <h4 class="card-title">Collision Avoidance System</h4>
                 </div>
                 <div class="card-body" style="padding: 10px">
-                  <!-- <p class="card-category">Running Successfully</p> -->
+                  <!-- <p class="card-category">Not Connected</p> -->
                 </div>
                 <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> Running Successfully
+                  <div id="system-status-desc" class="stats">
+                    <i class="material-icons">error</i> Not Connected
                   </div>
                 </div>
               </div>
@@ -148,29 +148,29 @@
           <div class="row">
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div id="perception_status" class="card-header danger_flashing card-header-icon">
+                <div id="perception_status" class="card-header danger-flashing card-header-icon">
                   <div class="card-icon">
                     <i id="perception_icon" class="material-icons">cancel</i>
                   </div>
                   <p class="card-category">Perception Pipeline</p>
-                  <h3 class="card-title"><span id="perception_fps">24</span><small> FPS</small></h3>
+                  <h3 class="card-title"><span id="perception_fps">0</span><small> FPS</small></h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
                     <!-- <i class="material-icons text-warning">warning</i>
-                    <a href="#pablo" class="warning-link">FPS dropped below 24...</a> -->
+                    <a href="#pablo" class="warning-link">FPS dropped below 0...</a> -->
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div id="tracking_fusion_status" class="card-header danger_flashing card-header-icon">
+                <div id="tracking_fusion_status" class="card-header danger-flashing card-header-icon">
                   <div class="card-icon">
                     <i id="tracking_fusion_icon" class="material-icons">cancel</i>
                   </div>
                   <p class="card-category">Tracking and Sensor Fusion Pipeline</p>
-                  <h3 class="card-title"><span id="tracking_fusion_fps">24</span><small> FPS</small></h3>
+                  <h3 class="card-title"><span id="tracking_fusion_fps">0</span><small> FPS</small></h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -181,12 +181,12 @@
             </div>
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div id="prediction_status" class="card-header danger_flashing card-header-icon">
+                <div id="prediction_status" class="card-header danger-flashing card-header-icon">
                   <div class="card-icon">
                     <i id="prediction_icon" class="material-icons">cancel</i>
                   </div>
                   <p class="card-category">Trajectory Prediction Pipeline</p>
-                  <h3 class="card-title"><span id="prediction_fps">24</span><small> FPS</small></h3>
+                  <h3 class="card-title"><span id="prediction_fps">0</span><small> FPS</small></h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -198,12 +198,12 @@
             </div>
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div id="planning_controls_status" class="card-header danger_flashing card-header-icon">
+                <div id="planning_controls_status" class="card-header danger-flashing card-header-icon">
                   <div class="card-icon">
                     <i id="planning_controls_icon" class="material-icons">cancel</i>
                   </div>
                   <p class="card-category">Planning and Controls Pipeline</p>
-                  <h3 class="card-title"><span id="planning_controls_fps">24</span><small> FPS</small></h3>
+                  <h3 class="card-title"><span id="planning_controls_fps">0</span><small> FPS</small></h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -373,9 +373,32 @@
       return (stamp.secs * 1e9 + stamp.nsecs) * 1e-9;
     }
 
+    var initial_date = new Date();
+    var initial_time = initial_date.getTime() / 1000;
+
+    // ################### Sound Alerts ###################
+
+    var audio_collision = new Audio('assets/alerts/alert2.mp3');
+    var audio_failure = new Audio('assets/alerts/ding.mp3');
+    var audio_login = new Audio('assets/alerts/login.mp3');
+    var audio_logout = new Audio('assets/alerts/logout.mp3');
+
+    function play_alert(audio) {
+      audio.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+      }, false);
+      audio.play();
+    }
+
+    function pause_alert(audio) {
+        audio.pause();
+    }
+
     // ################### Connecting to ROS ###################
 
     var rosbridge_url = 'ws://localhost:9090';
+    var first_close = true;
 
     var ros = new ROSLIB.Ros({
       url : rosbridge_url
@@ -385,7 +408,8 @@
       document.getElementById('cas-active').classList.remove('red-light');
       document.getElementById('cas-active').classList.add('green-light');
       console.log('Connected to websocket server.');
-
+      audio_login.play();
+      first_close = true;
       left_tab1_onclick();
       right_tab1_onclick();
     });
@@ -400,6 +424,12 @@
       document.getElementById('cas-active').classList.remove('green-light');
       document.getElementById('cas-active').classList.add('red-light');
       console.log('Connection to websocket server closed.');
+      if (first_close) {
+        audio_logout.play();
+        first_close = false;
+      }
+      pause_alert(audio_collision);
+      pause_alert(audio_failure);
     });
 
     // Handle ROS connection
@@ -416,46 +446,82 @@
       messageType: 'delta_msgs/CollisionDetection'
     });
 
+    var camera_info_topic = new ROSLIB.Topic({
+      ros: ros, name: '/carla/ego_vehicle/camera/rgb/front/camera_info',
+      messageType: 'sensor_msgs/CameraInfo'
+    });
+
+    var radar_topic = new ROSLIB.Topic({
+      ros: ros, name: '/carla/ego_vehicle/radar/tracks',
+      messageType: 'radar_msgs/RadarTrackArray'
+    });
+
     // ################### Subscribe to alerts topics ###################
 
-    var audio_collision = new Audio('assets/alerts/collision.mp3');
-    var audio_failure = new Audio('assets/alerts/failure.mp3');
-
     var alerts = {
-      'collision': {'audio': audio_collision, 'time_remaining': 0.0, 'play_interval': 5.0},
-      'failure': {'audio': audio_failure, 'time_remaining': 0.0, 'play_interval': 5.0}
-      // 'failure': {'audio': audio_failure, 'time_remaining': 0.0, 'play_interval': 5.0}
+      'collision': {'audio': audio_collision, 'last_time': 0.0, 'play_length': 3.0},
+      'failure': {'audio': audio_failure, 'last_time': 0.0, 'play_length': 2.0},
+      'camera': {'last_update_time': 0.0, 'last_time': 0.0, 'play_length': 0.5},
+      'radar': {'last_update_time': 0.0, 'last_time': 0.0, 'play_length': 0.5},
+      'system': {'last_update_time': 0.0, 'last_time': 0.0, 'play_length': 0.5}
     }
 
-    function play_alert(audio) {
-      audio.addEventListener('ended', function() {
-        this.currentTime = 0;
-        this.play();
-      }, false);
-      audio.play();
+    function stream_success(key) {
+      document.getElementById(key + '-status').classList.remove('card-header-warning');
+      document.getElementById(key + '-status').classList.remove('card-header-danger');
+      document.getElementById(key + '-status').classList.add('card-header-success');
+      document.getElementById(key + '-status-desc').innerHTML = 
+        '<i class="material-icons">access_time</i> Running Successfully';
     }
 
-    function pause_alert(audio) {
-        audio.pause();
+    function stream_warn(key) {
+      document.getElementById(key + '-status').classList.remove('card-header-danger');
+      document.getElementById(key + '-status').classList.remove('card-header-success'); 
+      document.getElementById(key + '-status').classList.add('card-header-warning');
+      document.getElementById(key + '-status-desc').innerHTML = 
+        '<i class="material-icons">error</i> Not Connected';
+    }
+
+    function stream_danger(key) {
+      document.getElementById(key + '-status').classList.remove('card-header-success');
+      document.getElementById(key + '-status').classList.remove('card-header-warning');
+      document.getElementById(key + '-status').classList.add('card-header-danger');
+      document.getElementById(key + '-status-desc').innerHTML = 
+        '<i class="material-icons">warning</i> Failure Detected';
     }
 
     function alerts_handler() {
+      var date = new Date();
+      var time_now = date.getTime() / 1000;
+
       for (var key in alerts) {
-        if (alerts[key]['time_remaining'] <= 0) {
+        time_stop = alerts[key]['last_time'] + alerts[key]['play_length'];
+        if (time_now > time_stop) {
           switch (key) {
-            case 'failure':
             case 'collision':
+              document.getElementById('main-background').classList.remove('alert-flashing');
+            case 'failure':
               pause_alert(alerts[key]['audio']);
-              document.getElementById('main-background').classList.remove('alert-flashing'); break;
+              break;
+            case 'camera':
+            case 'radar':
+            case 'system':
+              stream_success(key);
+              break;
           }
-        } else {
-          alerts[key]['time_remaining'] = Math.min(0, alerts[key]['time_remaining'] - 0.5);
-          play_alert(alerts[key]['audio']);
+        } else {          
           switch (key) {
             case 'collision':
-              document.getElementById('main-background').classList.add('alert-flashing'); break
+              document.getElementById('main-background').classList.add('alert-flashing');
             case 'failure':
-              document.getElementById('main-background').classList.add('alert-flashing'); break
+              if (ros.isConnected) play_alert(alerts[key]['audio']);
+              break;
+            case 'camera':
+            case 'radar':
+            case 'system':
+              if (!ros.isConnected) stream_warn(key);
+              else stream_danger(key);
+              break;
           }
         }
       }
@@ -465,14 +531,42 @@
       var ttc = duration_to_secs(msg.time_to_impact);
       var probability = msg.probability;
       if (probability > 0.5) {
-        alerts['collision']['time_remaining'] += alerts['collision']['play_interval'];
+        var date = new Date();
+        alerts['collision']['last_time'] = date.getTime() / 1000;
       }
     }
+
+    function stream_handler() {
+      var date = new Date();
+      var time_now = date.getTime() / 1000;
+
+      for (var key in alerts) {
+        if (key == 'camera' || key == 'radar') {
+          if (time_now - alerts[key]['last_update_time'] > 2.0) {
+            alerts[key]['last_time'] = time_now;
+            alerts['failure']['last_time'] = time_now;
+          }
+        }
+      }
+    }
+
+    function update_stream(msg, key) {
+      var date = new Date();
+      var time_now = date.getTime() / 1000;
+      alerts[key]['last_update_time'] = time_now;
+    }
+
+    camera_info_topic.subscribe(function(msg) { update_stream(msg, 'camera'); });
+    radar_topic.subscribe(function(msg) { update_stream(msg, 'radar'); });
 
     // Handle alerts
     window.setInterval(function(){
       alerts_handler();
     }, 500);
+
+    window.setInterval(function(){
+      stream_handler();
+    }, 100);
 
     collision_topic.subscribe(function(msg) { collision_event(msg); });
 
@@ -510,8 +604,6 @@
 
     // ################### Subscribe to diagnostics topics ###################
 
-    var initial_date = new Date();
-    var initial_time = initial_date.getTime() / 1000;
     var update_alpha = 0.75;
 
     var fps_dict = {
@@ -545,30 +637,32 @@
 
     function update_status(pipeline, limit) {
       var date = new Date();
-      var update_dt = (date.getTime() / 1000) - fps_dict[pipeline]['last_time'];
+      var time_now = date.getTime() / 1000;
+      var update_dt = time_now - fps_dict[pipeline]['last_time'];
       var status = document.getElementById(pipeline + '_status');
       var icon = document.getElementById(pipeline + '_icon');
       var fps = fps_dict[pipeline]['fps'];
 
       if (fps < 2 || update_dt > 2.0) {
-        // TODO: raise system level alert
+        alerts['system']['last_time'] = time_now;
         if (update_dt > 2.0) {
           icon.innerHTML = 'cancel';
           document.getElementById(pipeline + '_fps').innerHTML = 0;
         } else {
+          alerts['failure']['last_time'] = time_now;
           icon.innerHTML = 'error';
         }
 
         status.classList.remove('card-header-success');
         status.classList.remove('card-header-warning');
-        status.classList.add('danger_flashing');
+        status.classList.add('danger-flashing');
       } else if (fps < fps_dict[pipeline]['limit']) {
-        status.classList.remove('danger_flashing');
+        status.classList.remove('danger-flashing');
         status.classList.remove('card-header-success');
         status.classList.add('card-header-warning');
         icon.innerHTML = 'warning';
       } else if (fps >= fps_dict[pipeline]['limit']) {
-        status.classList.remove('danger_flashing');
+        status.classList.remove('danger-flashing');
         status.classList.remove('card-header-warning');
         status.classList.add('card-header-success');
         icon.innerHTML = 'check_circle';
