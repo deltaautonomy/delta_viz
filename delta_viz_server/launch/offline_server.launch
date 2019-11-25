@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- Play rosbag record -->
+    <include file="$(find delta_perception)/launch/play_rosbag.launch">
+        <arg name="filename" value="$(find delta_viz_server)/fvd/test_viz.bag" />
+    </include>
+
+    <!-- Launch socket rosbridge server -->
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
+
+    <!-- Load trailer URDF -->
+    <include file="$(find delta_description)/launch/display.launch">
+        <arg name="gui" value="false" />
+    </include>
+
+    <!-- Run collision avoidance system -->
+    <include file="$(find delta_viz_server)/launch/cas.launch" />
+
+    <!-- Generate compressed images -->
+    <include file="$(find delta_viz_server)/launch/compressed_images.launch" />
+
+    <!-- Launch Rviz -->
+    <!-- <node type="rviz" name="rviz" pkg="rviz" args="-d $(find delta_viz_server)/cas.rviz" /> -->
+
+    <!-- Launch Rviz camera streams -->
+    <include file="$(find delta_viz_server)/launch/rviz_streams.launch" />
+
+</launch>
