@@ -1,1 +1,3 @@
-# Visualization GUI
+# DeltaViz
+
+![DeltaViz](deltaviz.jpg?raw=true "DeltaViz")
