@@ -11,7 +11,11 @@ Launch the back-end server that interfaces with ROS master.
 roslaunch delta_viz_server server.launch
 ```
 
-Launch the front-end web app in the browser by navigating to `http://localhost:9000`.
+Launch the front-end web app in the browser by navigating to `http://localhost:8000`.
+```
+cd delta_viz_app
+python3 -m http.server 8000
+```
 
 ## See Also
 
